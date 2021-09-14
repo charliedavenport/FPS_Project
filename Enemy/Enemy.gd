@@ -31,18 +31,17 @@ func damage(dmg_amt: float) -> void:
 		kill()
 
 func fire_damage() -> void:
-	if is_on_fire:
-		return
+#	if is_on_fire:
+#		return
 	is_on_fire = true
 	var tics = int(fire_duration/fire_tic)
-	#fireAnim.stop()
+#	print("ON FIRE")
 	fireAnim.play("on_fire")
 	for i in range(tics):
 		damage(fire_dmg)
 		fireTimer.start()
 		yield(fireTimer, "timeout")
 		#print("ouch!")
-	#fireAnim.stop()
 	fireAnim.play("not_on_fire")
 	is_on_fire = false
 

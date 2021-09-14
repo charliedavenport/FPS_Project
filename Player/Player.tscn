@@ -54,7 +54,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.0625, 0.125, 0.375, 0.4375, 0.5, 0.5625 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -74.6636, -289.478 ), Vector2( -10.5851, -254.551 ), Vector2( 53.4935, -219.624 ), Vector2( 53.4935, -219.624 ), Vector2( -10.5851, -254.551 ), Vector2( -45.291, -270.569 ), Vector2( -74.6636, -289.478 ) ]
+"values": [ Vector2( -74.664, -296.777 ), Vector2( -7.66554, -260.39 ), Vector2( 53.4935, -229.842 ), Vector2( 49.1142, -228.382 ), Vector2( -7.66567, -260.39 ), Vector2( -45.291, -277.868 ), Vector2( -74.664, -296.777 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("PlayerHUD/Hands/RightHand/RightFireSprite:visible")
@@ -296,7 +296,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -74.6636, -289.478 ) ]
+"values": [ Vector2( -74.6636, -296.777 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("PlayerHUD/Hands/LeftHand/LeftFireSprite:frame")
@@ -627,18 +627,18 @@ __meta__ = {
 }
 
 [node name="LeftHandSprite" type="Sprite" parent="PlayerHUD/Hands/LeftHand"]
-position = Vector2( -181.54, -62.2494 )
-rotation = 0.100987
+position = Vector2( -181.54, -62.249 )
+rotation = 0.101229
 scale = Vector2( 0.417712, 0.417712 )
 z_index = 2
 texture = ExtResource( 3 )
 
 [node name="LeftFireSprite" type="Sprite" parent="PlayerHUD/Hands/LeftHand"]
-position = Vector2( -74.6636, -289.478 )
-scale = Vector2( 0.452368, 0.452368 )
+position = Vector2( -74.664, -296.777 )
 z_index = 1
 texture = ExtResource( 5 )
 hframes = 12
+frame = 1
 
 [node name="RightHand" type="Control" parent="PlayerHUD/Hands"]
 anchor_left = 0.5
@@ -657,10 +657,9 @@ texture = ExtResource( 7 )
 [node name="RightFireSprite" type="Sprite" parent="PlayerHUD/Hands/RightHand"]
 visible = false
 position = Vector2( 74.5094, -221.323 )
-scale = Vector2( 0.466228, 0.466228 )
 texture = ExtResource( 5 )
 hframes = 12
-frame = 11
+frame = 8
 
 [node name="Crosshair" type="TextureRect" parent="PlayerHUD"]
 anchor_left = 0.5
