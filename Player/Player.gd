@@ -48,9 +48,11 @@ func _physics_process(delta):
 		snap = Vector3.ZERO
 	#apply_slope()
 	apply_move_acceleration(delta)
-	if jump_request:
+	if jump_request and is_on_floor():
 		apply_jump()
-	elif not is_on_floor():
+	#elif not is_on_floor():
+	else:
+		jump_request = false
 		apply_gravity(delta)
 	#vel = move_and_slide(move_input, Vector3.UP, true, 4, 1.22)
 	vel = move_and_slide_with_snap(move_input, snap, Vector3.UP, true, 4)

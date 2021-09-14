@@ -429,10 +429,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.0625, 0.125, 0.1875, 0.25, 0.3125 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.0625, 0.125, 0.1875, 0.25, 0.3125, 0.377854, 0.4375, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3, 0, 1 ]
+"values": [ 0, 1, 2, 3, 0, 1, 2, 3, 4 ]
 }
 tracks/5/type = "method"
 tracks/5/path = NodePath("WeaponManager")
@@ -608,6 +608,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
+margin_left = -6.10352e-05
+margin_top = 6.10352e-05
+margin_right = -6.10352e-05
+margin_bottom = 6.10352e-05
 rect_scale = Vector2( 0.768949, 0.768949 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -635,7 +639,6 @@ scale = Vector2( 0.452368, 0.452368 )
 z_index = 1
 texture = ExtResource( 5 )
 hframes = 12
-frame = 1
 
 [node name="RightHand" type="Control" parent="PlayerHUD/Hands"]
 anchor_left = 0.5
@@ -657,7 +660,7 @@ position = Vector2( 74.5094, -221.323 )
 scale = Vector2( 0.466228, 0.466228 )
 texture = ExtResource( 5 )
 hframes = 12
-frame = 8
+frame = 11
 
 [node name="Crosshair" type="TextureRect" parent="PlayerHUD"]
 anchor_left = 0.5

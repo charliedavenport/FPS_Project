@@ -9,10 +9,13 @@ onready var playerHUD = get_parent().get_node("PlayerHUD")
 var is_returning_weapon_center: bool
 var molotov_charge: float
 
+var explosion_secret: bool
+
 func _ready():
 	handAnim.play("molotov_equip")
 	is_returning_weapon_center = false
 	molotov_charge = 0.0
+	explosion_secret = false
 	
 func _process(delta):
 	process_weapon_sway()
@@ -44,7 +47,7 @@ func charge_molotov_throw() -> void:
 		if Input.is_action_just_released("fire"):
 			return
 		else:
-			molotov_charge += 1.0 # should multiply by delta time?
+			molotov_charge += 2.0 # should multiply by delta time?
 			molotov_charge = clamp(molotov_charge, 0.0, 100.0) 
 			playerHUD.molotovChargeBar.value = molotov_charge
 			yield(get_tree(), "idle_frame")

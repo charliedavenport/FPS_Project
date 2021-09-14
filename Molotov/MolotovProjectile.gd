@@ -34,10 +34,11 @@ func explode():
 	$CollisionShape.disabled = true
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("explosion") # -> on_explosion_end()
-	var bodies = $ExplosionArea.get_overlapping_bodies()
+	var bodies = $FireArea.get_overlapping_bodies()
 	for bod in bodies:
-		if bod.get_collision_layer() == 8: # Enemy = 3 -> 2^3 = 8  I FUCKING HATE BITMASKS
-			bod.damage(dmg)
+		if bod.get_collision_layer() == 8: # Enemy = Layer 3 -> 2^3 = 8  I FUCKING HATE BITMASKS
+			#bod.damage(dmg)
+			bod.fire_damage()
 
 func on_explosion_end():
 	queue_free()

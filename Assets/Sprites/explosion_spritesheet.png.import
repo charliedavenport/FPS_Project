@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fire_spritesheet_color.png-4034babea99e011e8a16fbcde992594c.stex"
+path="res://.import/explosion_spritesheet.png-c79893e71e2162b4b996cd72336ff879.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/fire_spritesheet_color.png"
-dest_files=[ "res://.import/fire_spritesheet_color.png-4034babea99e011e8a16fbcde992594c.stex" ]
+source_file="res://Assets/Sprites/explosion_spritesheet.png"
+dest_files=[ "res://.import/explosion_spritesheet.png-c79893e71e2162b4b996cd72336ff879.stex" ]
 
 [params]
 
@@ -23,11 +23,12 @@ flags/repeat=0
 flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
-flags/srgb=0
+flags/srgb=1
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=false

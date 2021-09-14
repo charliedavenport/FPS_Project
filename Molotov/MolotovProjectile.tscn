@@ -1,17 +1,17 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Molotov/MolotovProjectile.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Bottle_spritesheet_color.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Sprites/explosion.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/explosion_spritesheet.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/explosion.png" type="Texture" id=5]
 
 [sub_resource type="SphereShape" id=1]
 radius = 0.5
 
 [sub_resource type="Animation" id=2]
-resource_name = "explosion"
-length = 0.5
+length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("ExplosionSprite:visible")
+tracks/0/path = NodePath("MolotovSprite:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -19,11 +19,11 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
+"update": 0,
 "values": [ true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("MolotovSprite:visible")
+tracks/1/path = NodePath("ExplosionSprite:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -34,34 +34,110 @@ tracks/1/keys = {
 "update": 1,
 "values": [ false ]
 }
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
+tracks/2/type = "value"
+tracks/2/path = NodePath("MolotovSprite:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.4 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("FireArea/MeshInstance:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 1.125
+step = 0.0625
+tracks/0/type = "value"
+tracks/0/path = NodePath("ExplosionSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.0625, 0.125, 0.1875, 0.25, 0.3125, 0.375, 0.4375, 0.5, 0.5625, 0.625, 0.6875, 0.75, 0.8125, 0.875, 0.9375, 1, 1.0625 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.125 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "on_explosion_end"
 } ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("ExplosionSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 tracks/3/type = "value"
-tracks/3/path = NodePath("ExplosionArea/ExplosionMesh:visible")
+tracks/3/path = NodePath("MolotovSprite:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ExplosionArea/ExplosionMesh:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = false
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.0625 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ false, false ]
+"values": [ true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("FireArea/MeshInstance:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = false
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.0625 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 length = 0.5
 loop = true
 step = 0.0833333
@@ -114,13 +190,22 @@ tracks/3/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="SphereShape" id=4]
+[sub_resource type="SphereShape" id=5]
 radius = 2.0
 
-[sub_resource type="SphereMesh" id=5]
+[sub_resource type="SphereMesh" id=6]
 
-[sub_resource type="SphereShape" id=6]
-radius = 3.0
+[sub_resource type="SphereShape" id=7]
+radius = 3.5
+
+[sub_resource type="SpatialMaterial" id=8]
+transmission_enabled = true
+transmission = Color( 0.545098, 0.545098, 0.545098, 1 )
+
+[sub_resource type="SphereMesh" id=9]
+material = SubResource( 8 )
+radius = 3.5
+height = 7.0
 
 [node name="MolotovProjectile" type="KinematicBody"]
 collision_layer = 4
@@ -132,20 +217,27 @@ shape = SubResource( 1 )
 
 [node name="MolotovSprite" type="Sprite3D" parent="."]
 transform = Transform( 0.0928111, 0, 0, 0, 0.0928111, 0, 0, 0, 1, 0, 0, 0 )
+visible = false
 billboard = 1
 texture = ExtResource( 2 )
 hframes = 6
 
 [node name="ExplosionSprite" type="Sprite3D" parent="."]
-transform = Transform( 0.798252, 0, 0, 0, 0.798252, 0, 0, 0, -0.114363, 0, 0.875243, 0 )
-visible = false
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.615, 0 )
 billboard = 1
 texture = ExtResource( 3 )
+hframes = 18
+
+[node name="SecretExplosionSprite" type="Sprite3D" parent="."]
+visible = false
+billboard = 1
+texture = ExtResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "spin"
-anims/explosion = SubResource( 2 )
-anims/spin = SubResource( 3 )
+anims/RESET = SubResource( 2 )
+anims/explosion = SubResource( 3 )
+anims/spin = SubResource( 4 )
 
 [node name="KillTimer" type="Timer" parent="."]
 wait_time = 10.0
@@ -153,15 +245,20 @@ wait_time = 10.0
 [node name="ExplosionArea" type="Area" parent="."]
 
 [node name="CollisionShape" type="CollisionShape" parent="ExplosionArea"]
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="ExplosionMesh" type="MeshInstance" parent="ExplosionArea"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
 visible = false
-mesh = SubResource( 5 )
+mesh = SubResource( 6 )
 material/0 = null
 
 [node name="FireArea" type="Area" parent="."]
 
 [node name="CollisionShape" type="CollisionShape" parent="FireArea"]
-shape = SubResource( 6 )
+shape = SubResource( 7 )
+
+[node name="MeshInstance" type="MeshInstance" parent="FireArea"]
+visible = false
+mesh = SubResource( 9 )
+material/0 = null
