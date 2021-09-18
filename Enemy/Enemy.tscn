@@ -1,16 +1,16 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Enemy/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/fire_spritesheet_color.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Enemy.tres" type="Material" id=3]
-[ext_resource path="res://Assets/Enemy_hurt.tres" type="Material" id=4]
+[ext_resource path="res://Assets/Sprites/enemy_spritesheet.png" type="Texture" id=5]
 
 [sub_resource type="CapsuleShape" id=1]
-
-[sub_resource type="CapsuleMesh" id=2]
+radius = 0.49733
+height = 1.64178
 
 [sub_resource type="Animation" id=3]
 resource_name = "Damaged"
+length = 0.1
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
 tracks/0/interp = 1
@@ -25,21 +25,12 @@ tracks/0/keys = {
 "method": "on_damaged_end"
 } ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("MeshInstance:material/0")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ ExtResource( 4 ), ExtResource( 3 ) ]
-}
 
 [sub_resource type="Animation" id=4]
 resource_name = "Idle"
+length = 0.5
+loop = true
+step = 0.0625
 tracks/0/type = "value"
 tracks/0/path = NodePath("FireSprite:visible")
 tracks/0/interp = 1
@@ -53,16 +44,16 @@ tracks/0/keys = {
 "values": [ false ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("MeshInstance:material/0")
+tracks/1/path = NodePath("EnemySprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ ExtResource( 3 ) ]
+"values": [ 0, 1 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -149,22 +140,25 @@ collision_mask = 23
 script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.5, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.30485, 0 )
 shape = SubResource( 1 )
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.5, 0 )
-layers = 2
-mesh = SubResource( 2 )
-material/0 = ExtResource( 3 )
+[node name="EnemySprite" type="Sprite3D" parent="."]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 1, 0, 1.42938, 0 )
+billboard = 2
+texture = ExtResource( 5 )
+hframes = 2
 
 [node name="FireSprite" type="Sprite3D" parent="."]
-transform = Transform( 1.73377, 0, 0, 0, 1.73377, 0, 0, 0, 1, 0, 3.891, 0 )
+transform = Transform( 1.04026, 0, 0, 0, 1.04026, 0, 0, 0, 1, 0, 3.27164, 0 )
+visible = false
 billboard = 2
 texture = ExtResource( 2 )
 hframes = 12
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
 anims/Damaged = SubResource( 3 )
 anims/Idle = SubResource( 4 )
 anims/Killed = SubResource( 5 )
