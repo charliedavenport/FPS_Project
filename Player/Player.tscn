@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/crosshair.png" type="Texture" id=2]
@@ -556,6 +556,10 @@ tracks/0/keys = {
 "values": [ Vector2( 512, 600 ), Vector2( 458.907, 595.635 ), Vector2( 417.613, 575.459 ), Vector2( 458.907, 595.635 ), Vector2( 512, 600 ), Vector2( 512, 600 ), Vector2( 558.904, 595.358 ), Vector2( 606.4, 575.459 ), Vector2( 558.904, 595.358 ) ]
 }
 
+[sub_resource type="CylinderShape" id=10]
+radius = 0.406788
+height = 0.54172
+
 [node name="Player" type="KinematicBody"]
 pause_mode = 1
 collision_mask = 26
@@ -706,3 +710,7 @@ margin_bottom = 338.878
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.306442, 0 )
+shape = SubResource( 10 )

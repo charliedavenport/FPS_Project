@@ -8,6 +8,7 @@ export var fall_accel_down: float = 3.0
 export var fall_accel_up: float = 1.0
 export var max_fall_speed: float = -15.0
 export var jump_speed: float = 10.0
+export var max_floor_angle: float = 0.7
 
 var vel: Vector3
 var move_input: Vector3
@@ -16,6 +17,9 @@ var snap: Vector3
 var is_jump_cooldown: bool
 var jump_request: bool
 var is_returning_weapon_center: bool
+
+var min_floor_y: float
+var floor_y: float
 
 onready var cam = get_node("Camera")
 onready var jump_timer = get_node("JumpTimer")
@@ -29,6 +33,8 @@ func _ready():
 	is_jump_cooldown = false
 	jump_timer.connect("timeout", self, "on_jump_cooldown")
 	is_returning_weapon_center = false
+	min_floor_y = sin((PI/2) - max_floor_angle) # i <3 trig
+	print(min_floor_y)
 	
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -46,7 +52,7 @@ func _physics_process(delta):
 		snap = -get_floor_normal()
 	else:
 		snap = Vector3.ZERO
-	#apply_slope()
+	apply_slope()
 	apply_move_acceleration(delta)
 	if jump_request and is_on_floor():
 		apply_jump()
@@ -55,10 +61,8 @@ func _physics_process(delta):
 		jump_request = false
 		apply_gravity(delta)
 	#vel = move_and_slide(move_input, Vector3.UP, true, 4, 1.22)
-	vel = move_and_slide_with_snap(move_input, snap, Vector3.UP, true, 4)
-#	var slides = get_slide_count()
-#	if slides > 0:
-#		handle_slopes(slides)
+	vel = move_and_slide_with_snap(move_input, snap, Vector3.UP, true, 4, 0.6)
+	
 
 func apply_slope() -> void:
 	# rotate movement input to be on the plane of a slope
@@ -67,8 +71,10 @@ func apply_slope() -> void:
 		return
 	for i in range(slides):
 		var col = get_slide_collision(i)
-		if col.normal.y < 1.0:
-			pass
+		floor_y = col.normal.y
+		if floor_y < min_floor_y:
+			move_input.x = 0
+			move_input.z = 0
 
 func apply_move_acceleration(delta: float) -> void:
 	var wish_dir = move_input * move_speed
