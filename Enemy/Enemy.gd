@@ -11,6 +11,8 @@ var is_on_fire: bool
 onready var fireTimer = get_node("FireTimer")
 onready var anim = get_node("AnimationPlayer")
 onready var fireAnim = get_node("FireAnimationPlayer")
+onready var enemySprite = get_node("EnemySprite")
+onready var dmgAnim = get_node("DmgAnimationPlayer")
 
 func _ready():
 	health = 100.0
@@ -25,7 +27,7 @@ func kill() -> void:
 func damage(dmg_amt: float) -> void:
 	if dmg_amt == 0:
 		return
-	anim.play("Damaged")
+	dmgAnim.play("damaged")
 	health -= dmg_amt
 	if health <= 0.0:
 		kill()
@@ -45,6 +47,5 @@ func fire_damage() -> void:
 	fireAnim.play("not_on_fire")
 	is_on_fire = false
 
-func on_damaged_end() -> void:
-	anim.stop()
-	anim.play("Idle")
+func _on_DmgFlashTimer_timeout():
+	enemySprite.material_override.set_shader_param("flash_modifier", 0.0)
