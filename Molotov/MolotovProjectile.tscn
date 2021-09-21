@@ -217,14 +217,13 @@ shape = SubResource( 1 )
 
 [node name="MolotovSprite" type="Sprite3D" parent="."]
 transform = Transform( 0.35, 0, 0, 0, 0.35, 0, 0, 0, 1, 0, 0, 0 )
-visible = false
 billboard = 1
 texture = ExtResource( 2 )
 hframes = 6
-frame = 5
 
 [node name="ExplosionSprite" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.615, 0 )
+visible = false
 billboard = 1
 texture = ExtResource( 3 )
 hframes = 18

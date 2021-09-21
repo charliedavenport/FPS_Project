@@ -8,7 +8,9 @@ export var fall_accel_down: float = 3.0
 export var fall_accel_up: float = 1.0
 export var max_fall_speed: float = -15.0
 export var jump_speed: float = 10.0
-export var max_floor_angle: float = 0.7
+export var max_floor_angle: float = 40.0
+export var max_vertical_rot: float = 1.4 #PI/2
+export var min_vertical_rot: float = -1.4 #-PI/2
 
 var vel: Vector3
 var move_input: Vector3
@@ -20,6 +22,7 @@ var is_returning_weapon_center: bool
 
 var min_floor_y: float
 var floor_y: float
+var vertical_rot: float
 
 onready var cam = get_node("Camera")
 onready var jump_timer = get_node("JumpTimer")
@@ -33,14 +36,18 @@ func _ready():
 	is_jump_cooldown = false
 	jump_timer.connect("timeout", self, "on_jump_cooldown")
 	is_returning_weapon_center = false
-	min_floor_y = sin((PI/2) - max_floor_angle) # i <3 trig
-	print(min_floor_y)
+	min_floor_y = sin((PI/2) - deg2rad(max_floor_angle)) # i <3 trig
+	vertical_rot = self.transform.basis.get_euler().x
 	
 func _input(event):
 	if event is InputEventMouseMotion:
 		var mouse_delta = event.relative
-		cam.rotate_x(mouse_delta.y * look_sens )
+		if mouse_delta.y < 0 and vertical_rot < max_vertical_rot:
+			cam.rotate_x(mouse_delta.y * look_sens )
+		elif mouse_delta.y > 0 and vertical_rot > min_vertical_rot:
+			cam.rotate_x(mouse_delta.y * look_sens )
 		self.rotate_y(-1 * mouse_delta.x * look_sens)
+		vertical_rot = cam.transform.basis.get_euler().x
 
 func _process(_delta):
 	get_move_input()
@@ -51,7 +58,7 @@ func _physics_process(delta):
 		vel.y = 0.0
 		snap = -get_floor_normal()
 	else:
-		snap = Vector3.ZERO
+		snap = Vector3.DOWN
 	apply_slope()
 	apply_move_acceleration(delta)
 	if jump_request and is_on_floor():
@@ -91,6 +98,8 @@ func apply_jump() -> void:
 	jump_timer.start()
 
 func apply_gravity(delta) -> void:
+	var grav_dir = snap.normalized() * max_fall_speed
+	# TDOO: handle vertical and horizontal vel separately (float and vector2) 
 	if vel.y > 0:
 		move_input.y = lerp(vel.y, max_fall_speed, fall_accel_up*delta)
 	else:
