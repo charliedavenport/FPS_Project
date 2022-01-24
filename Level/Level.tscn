@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/grid_material.tres" type="Material" id=3]
 [ext_resource path="res://Enemy/Enemy.tscn" type="PackedScene" id=4]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 resource_name = "New Anim"
 length = 2.0
 loop = true
@@ -21,7 +21,7 @@ tracks/0/keys = {
 "values": [ Color( 0.894118, 0.133333, 0.133333, 1 ), Color( 0.133333, 0.894118, 0.87451, 1 ), Color( 0.941176, 0.92549, 0.0392157, 1 ), Color( 0.737255, 0.0862745, 0.917647, 1 ), Color( 0.894118, 0.133333, 0.133333, 1 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:light_color")
@@ -99,7 +99,7 @@ polygon = PoolVector2Array( 0.0250034, -0.936854, 0.0144687, 1.66061, 2.05165, -
 material = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.308448, -3 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.399921, -3 )
 look_sens = 0.001
 
 [node name="Enemy2" parent="." instance=ExtResource( 4 )]
@@ -131,7 +131,7 @@ spot_angle = 59.1899
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SpotLight"]
 autoplay = "New Anim"
-"anims/New Anim" = SubResource( 3 )
-anims/RESET = SubResource( 4 )
+"anims/New Anim" = SubResource( 1 )
+anims/RESET = SubResource( 2 )
 
 [editable path="Player"]

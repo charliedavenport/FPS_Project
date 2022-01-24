@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/crosshair.png" type="Texture" id=2]
@@ -556,10 +556,6 @@ tracks/0/keys = {
 "values": [ Vector2( 512, 600 ), Vector2( 458.907, 595.635 ), Vector2( 417.613, 575.459 ), Vector2( 458.907, 595.635 ), Vector2( 512, 600 ), Vector2( 512, 600 ), Vector2( 558.904, 595.358 ), Vector2( 606.4, 575.459 ), Vector2( 558.904, 595.358 ) ]
 }
 
-[sub_resource type="CylinderShape" id=10]
-radius = 0.406788
-height = 0.54172
-
 [node name="Player" type="KinematicBody"]
 pause_mode = 1
 collision_mask = 26
@@ -612,10 +608,6 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -6.10352e-05
-margin_top = 6.10352e-05
-margin_right = -6.10352e-05
-margin_bottom = 6.10352e-05
 rect_scale = Vector2( 0.768949, 0.768949 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -631,18 +623,18 @@ __meta__ = {
 }
 
 [node name="LeftHandSprite" type="Sprite" parent="PlayerHUD/Hands/LeftHand"]
-position = Vector2( -181.54, -62.249 )
-rotation = 0.101229
+position = Vector2( -181.54, -62.2494 )
+rotation = 0.100987
 scale = Vector2( 0.417712, 0.417712 )
 z_index = 2
 texture = ExtResource( 3 )
 
 [node name="LeftFireSprite" type="Sprite" parent="PlayerHUD/Hands/LeftHand"]
-position = Vector2( -74.664, -296.777 )
+position = Vector2( -74.6636, -289.478 )
 z_index = 1
 texture = ExtResource( 5 )
 hframes = 12
-frame = 1
+frame = 3
 
 [node name="RightHand" type="Control" parent="PlayerHUD/Hands"]
 anchor_left = 0.5
@@ -663,7 +655,7 @@ visible = false
 position = Vector2( 74.5094, -221.323 )
 texture = ExtResource( 5 )
 hframes = 12
-frame = 8
+frame = 11
 
 [node name="Crosshair" type="TextureRect" parent="PlayerHUD"]
 anchor_left = 0.5
@@ -710,7 +702,3 @@ margin_bottom = 338.878
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="CollisionShape2" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.306442, 0 )
-shape = SubResource( 10 )

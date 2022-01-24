@@ -1,4 +1,5 @@
 extends KinematicBody
+class_name Player
 
 export var move_speed: float = 10.0
 export var look_sens: float = .01
@@ -9,8 +10,8 @@ export var fall_accel_up: float = 1.0
 export var max_fall_speed: float = -15.0
 export var jump_speed: float = 10.0
 export var max_floor_angle: float = 40.0
-export var max_vertical_rot: float = 1.4 #PI/2
-export var min_vertical_rot: float = -1.4 #-PI/2
+export var max_vertical_rot: float = 1.4 
+export var min_vertical_rot: float = -1.4 
 
 var vel: Vector3
 var move_input: Vector3
@@ -72,7 +73,7 @@ func _physics_process(delta):
 	
 
 func apply_slope() -> void:
-	# rotate movement input to be on the plane of a slope
+	# TODO: rotate movement input to be on the plane of a slope
 	var slides = get_slide_count()
 	if slides == 0:
 		return

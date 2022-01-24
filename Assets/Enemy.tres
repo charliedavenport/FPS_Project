@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Assets/Sprites/enemy_spritesheet.png" type="Texture" id=1]
 
-[sub_resource type="Shader" id=13]
+[sub_resource type="Shader" id=1]
 resource_local_to_scene = true
 resource_name = "enemyShader"
 code = "shader_type spatial;
@@ -29,7 +29,7 @@ void fragment() {
 [resource]
 resource_local_to_scene = true
 resource_name = "enemyMaterial"
-shader = SubResource( 13 )
+shader = SubResource( 1 )
 shader_param/flash_color = Color( 1, 1, 1, 1 )
 shader_param/flash_modifier = 0.0
 shader_param/tex = ExtResource( 1 )
