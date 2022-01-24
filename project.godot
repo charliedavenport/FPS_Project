@@ -9,13 +9,43 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Control",
+"class": "BoltRifleWeapon",
+"language": "GDScript",
+"path": "res://Player/BoltRifleWeapon.gd"
+}, {
+"base": "Control",
+"class": "MolotovWeapon",
+"language": "GDScript",
+"path": "res://Molotov/MolotovWeapon.gd"
+}, {
 "base": "KinematicBody",
 "class": "Player",
 "language": "GDScript",
 "path": "res://Player/Player.gd"
+}, {
+"base": "CanvasLayer",
+"class": "PlayerHUD",
+"language": "GDScript",
+"path": "res://Player/PlayerHud.gd"
+}, {
+"base": "Control",
+"class": "PlayerHands",
+"language": "GDScript",
+"path": "res://Player/PlayerHands.gd"
+}, {
+"base": "Node",
+"class": "WeaponManager",
+"language": "GDScript",
+"path": "res://Player/WeaponManager.gd"
 } ]
 _global_script_class_icons={
-"Player": ""
+"BoltRifleWeapon": "",
+"MolotovWeapon": "",
+"Player": "",
+"PlayerHUD": "",
+"PlayerHands": "",
+"WeaponManager": ""
 }
 
 [application]
@@ -69,6 +99,31 @@ jump={
 fire={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+weapon_1={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":49,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+weapon_2={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":50,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+weapon_3={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":51,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+weapon_4={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":52,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+weapon_5={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":53,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

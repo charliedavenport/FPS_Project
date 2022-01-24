@@ -1,4 +1,5 @@
 extends CanvasLayer
+class_name PlayerHUD
 
 onready var molotovChargeBar = get_node("MolotovChargeBar")
 
