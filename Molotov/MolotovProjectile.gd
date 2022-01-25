@@ -1,4 +1,5 @@
 extends KinematicBody
+class_name MolotovProjectile
 
 const GRAVITY : float = 10.0
 const MIN_SPEED: float = 8.0
@@ -36,7 +37,7 @@ func explode():
 	$AnimationPlayer.play("explosion") # -> on_explosion_end()
 	var bodies = $FireArea.get_overlapping_bodies()
 	for bod in bodies:
-		if bod.get_collision_layer() == 8: # Enemy = Layer 3 -> 2^3 = 8  I FUCKING HATE BITMASKS
+		if bod is Enemy:
 			#bod.damage(dmg)
 			bod.fire_damage()
 

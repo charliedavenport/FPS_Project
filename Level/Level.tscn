@@ -51,15 +51,15 @@ depth = 14.8809
 material = ExtResource( 3 )
 
 [node name="CSGBox4" type="CSGBox" parent="CSGCombiner"]
-transform = Transform( -5.71644e-08, 6.87044, 0, -1.30777, -3.00316e-07, 0, 0, 0, 1.67741, 23.5224, 5.67798, 0 )
-width = 8.22033
+transform = Transform( -5.71644e-08, 6.87044, 0, -1.30777, -3.00316e-07, 0, 0, 0, 1.67741, 23.5224, 1.32069, 0 )
+width = 1.56568
 height = 0.153087
 depth = 14.8809
 material = ExtResource( 3 )
 
 [node name="CSGBox5" type="CSGBox" parent="CSGCombiner"]
-transform = Transform( 2.49874e-15, -3.00316e-07, -1.67741, -1.30777, -3.00316e-07, 0, -5.71644e-08, 6.87044, -7.33219e-08, 7.90704, 5.67798, -12 )
-width = 8.22033
+transform = Transform( 2.49874e-15, -3.00316e-07, -1.67741, -1.30777, -3.00316e-07, 0, -5.71644e-08, 6.87044, -7.33219e-08, 7.90704, 1.32069, -12 )
+width = 1.56774
 height = 0.153087
 depth = 19.0448
 material = ExtResource( 3 )
@@ -95,12 +95,18 @@ material = ExtResource( 3 )
 
 [node name="CSGPolygon2" type="CSGPolygon" parent="CSGCombiner"]
 transform = Transform( -4.73601e-07, 0, -31.3912, 0, 1.5611, 0, 5.0156, 0, -6.35196e-07, -7.43914, -2.34627, 12.3962 )
-polygon = PoolVector2Array( 0.0250034, -0.936854, 0.0144687, 1.66061, 2.05165, -0.96831 )
+polygon = PoolVector2Array( 0.0250034, -0.936854, 0.0123339, 1.68437, 2.05165, -0.96831 )
 material = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.399921, -3 )
 look_sens = 0.001
+
+[node name="PlayerHands" parent="Player/PlayerHUD" index="0"]
+margin_left = 960.0
+margin_top = 1080.0
+margin_right = 960.0
+margin_bottom = 1080.0
 
 [node name="Enemy2" parent="." instance=ExtResource( 4 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, 0.304732, 0 )

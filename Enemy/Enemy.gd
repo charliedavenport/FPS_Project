@@ -1,4 +1,5 @@
 extends KinematicBody
+class_name Enemy
 
 export var MAX_HEALTH: float = 100.0
 export var fire_dmg: float = 5.0

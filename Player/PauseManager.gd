@@ -6,6 +6,8 @@ func _ready():
 	pausedText.visible = false
 	
 func _process(delta):
+	if Input.is_action_just_pressed("quit"):
+		get_tree().quit()
 	if Input.is_action_just_pressed("pause"):
 		if get_tree().paused:
 			#print("unpausing")

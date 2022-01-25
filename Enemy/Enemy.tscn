@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Enemy/Enemy.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Sprites/fire_spritesheet_color.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/fire_spritesheet_color_enemy.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Enemy.tres" type="Material" id=3]
 [ext_resource path="res://Assets/Sprites/enemy_spritesheet.png" type="Texture" id=5]
 

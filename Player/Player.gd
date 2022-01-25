@@ -1,7 +1,7 @@
 extends KinematicBody
 class_name Player
 
-export var move_speed: float = 10.0
+const move_speed: float = 5.0
 export var look_sens: float = .01
 export var accel: float = 5.0
 export var deaccel: float = 10.0
@@ -26,9 +26,11 @@ var floor_y: float
 var vertical_rot: float
 
 onready var cam = get_node("Camera")
+onready var cam_ray = get_node("Camera/RayCast")
 onready var jump_timer = get_node("JumpTimer")
 onready var molotov_scene = preload("res://Molotov/MolotovProjectile.tscn")
 onready var molotov_spawn = get_node("Camera/MolotovSpawn")
+onready var weapon_manager = get_node("WeaponManager")
 
 func _ready():
 	vel = Vector3.ZERO
@@ -36,6 +38,7 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	is_jump_cooldown = false
 	jump_timer.connect("timeout", self, "on_jump_cooldown")
+	weapon_manager.get_weapon_by_name("Bolt Rifle").root_node.connect("BoltRifleShoot", self, "shoot_ray")
 	is_returning_weapon_center = false
 	min_floor_y = sin((PI/2) - deg2rad(max_floor_angle)) # i <3 trig
 	vertical_rot = self.transform.basis.get_euler().x
@@ -129,3 +132,13 @@ func spawn_molotov(speed: float) -> void:
 	var molotov_inst = molotov_scene.instance()
 	get_tree().root.add_child(molotov_inst)
 	molotov_inst.start(molotov_spawn.global_transform, speed, player_forward_vel)
+
+func shoot_ray(dmg: float) -> void:
+	cam_ray.force_raycast_update()
+	if not cam_ray.is_colliding():
+		return
+	var col = cam_ray.get_collider()
+	if col is Enemy:
+		col.damage(dmg)
+	elif col is MolotovProjectile:
+		col.explode()

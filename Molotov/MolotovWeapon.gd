@@ -5,9 +5,7 @@ onready var player = get_node("../../..")
 onready var anim = get_node("MolotovAnim")
 onready var playerHUD = get_node("../..")
 
-
 var molotov_charge: float
-
 var explosion_secret: bool
 
 func enable() -> void:
@@ -18,16 +16,10 @@ func enable() -> void:
 	explosion_secret = false
 	
 func _process(delta):
-	process_hand_anim()
-
-func process_hand_anim() -> void:
 	if anim.current_animation == "molotov_idle" and Input.is_action_just_pressed("fire"):
 		anim.stop()
 		anim.play("light_molotov") # -> on_light_molotov_end()
 
-# ********************************************************************
-# FIRE MOLOTOV
-# ********************************************************************
 func molotov_fire() -> void:
 	anim.stop()
 	anim.play("throw_molotov_hold")
@@ -51,9 +43,6 @@ func charge_molotov_throw() -> void:
 			playerHUD.molotovChargeBar.value = molotov_charge
 			yield(get_tree(), "idle_frame")
 
-# ********************************************************************
-# ANIMATION PLAYER 
-# ********************************************************************
 func on_light_molotov_end() -> void:
 	anim.stop()
 	if Input.is_action_pressed("fire"):

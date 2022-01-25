@@ -5,6 +5,10 @@ onready var player = get_node("../..")
 onready var weaponSwayAnim = get_node("WeaponSwayAnimator")
 
 var is_returning_weapon_center: bool
+var hand_resting_loc: Vector2
+
+func _ready():
+	hand_resting_loc = Vector2(get_viewport_rect().size.x / 2.0, get_viewport_rect().size.y)
 
 func _process(delta):
 	process_weapon_sway()
@@ -30,13 +34,13 @@ func process_weapon_sway() -> void:
 		is_returning_weapon_center = false
 
 func return_weapon_to_center() -> void:
-	var target = Vector2(512,600)
+	var target = hand_resting_loc
 	while rect_position.distance_to(target) > 1.0:
 		rect_position = rect_position.linear_interpolate(target, 0.25)
 		yield(get_tree(), "idle_frame")
 	return
 
 func wait_for_weapon_to_center() -> void:
-	var target = Vector2(512,600)
+	var target = hand_resting_loc
 	while rect_position.distance_to(target) > 1.0:
 		yield(get_tree(), "idle_frame")
