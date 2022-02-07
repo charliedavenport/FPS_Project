@@ -14,11 +14,12 @@ onready var player = get_node("../..")
 onready var sway_tween = get_node("WeaponSwayTween")
 onready var return_tween = get_node("ReturnToCenterTween")
 
-onready var hands_idle: Vector2 = Vector2(get_viewport_rect().size.x / 2.0, get_viewport_rect().size.y)
+onready var hands_idle: Vector2 = Vector2(get_viewport_rect().size.x / 2.0, get_viewport_rect().size.y) \
+		+ Vector2(0.0, -vert_offset)
 onready var target_pos = [hands_idle, 
-		hands_idle + Vector2(-horiz_offset, -vert_offset),
+		hands_idle + Vector2(-horiz_offset, vert_offset),
 		hands_idle, 
-		hands_idle + Vector2(horiz_offset, -vert_offset)]
+		hands_idle + Vector2(horiz_offset, vert_offset)]
 onready var target_pos_ind := 0
 onready var sway_interval = weapon_sway_len / 4.0
 
