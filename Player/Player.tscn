@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/crosshair.png" type="Texture" id=2]
@@ -25,39 +25,6 @@ radius = 0.407067
 height = 0.43
 
 [sub_resource type="CapsuleMesh" id=2]
-
-[sub_resource type="Animation" id=15]
-length = 0.001
-
-[sub_resource type="Animation" id=8]
-tracks/0/type = "value"
-tracks/0/path = NodePath("PlayerHUD/PlayerHands:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 900, 900 ) ]
-}
-
-[sub_resource type="Animation" id=9]
-length = 0.8
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("PlayerHUD/PlayerHands:rect_position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 900, 900 ), Vector2( 850, 870 ), Vector2( 900, 900 ), Vector2( 950, 870 ) ]
-}
 
 [sub_resource type="Animation" id=10]
 resource_name = "Idle"
@@ -344,7 +311,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1875, 0.3125, 0.375, 0.4375, 0.5625, 0.75, 0.8125, 1 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 998.586, 302.367 ), Vector2( 682.482, 46.6444 ), Vector2( 665.01, -49.9111 ), Vector2( 665.01, -49.9111 ), Vector2( 710.801, -20.6834 ), Vector2( 710.801, -20.6834 ), Vector2( 665.01, -49.9111 ), Vector2( 682.482, 46.6444 ), Vector2( 998.586, 302.367 ) ]
+"values": [ Vector2( 998.586, 302.367 ), Vector2( 643.801, 36.5537 ), Vector2( 619.602, -53.2746 ), Vector2( 619.602, -53.2746 ), Vector2( 668.756, -24.047 ), Vector2( 668.756, -24.047 ), Vector2( 619.602, -54.9564 ), Vector2( 643.801, 36.5536 ), Vector2( 998.586, 302.367 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("RightHand:rect_rotation")
@@ -592,7 +559,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.0625, 0.125, 0.1875, 0.252, 0.315, 0.375, 0.4375, 0.5, 0.5625 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 1, 2, 3, 5, 7, 9, 10, 0, 1, 2 ]
+"values": [ 1, 2, 3, 5, 7, 9, 0, 1, 2, 3 ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("PlayerHUD/PlayerHands/MolotovWeapon/RightHand/RightFireSprite:frame")
@@ -1090,12 +1057,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WeaponSwayAnimator" type="AnimationPlayer" parent="PlayerHUD/PlayerHands"]
-root_node = NodePath("../../..")
-autoplay = "still"
-anims/RESET = SubResource( 15 )
-anims/still = SubResource( 8 )
-anims/weapon_sway = SubResource( 9 )
+[node name="WeaponSwayTween" type="Tween" parent="PlayerHUD/PlayerHands"]
+repeat = true
+playback/repeat = true
+
+[node name="ReturnToCenterTween" type="Tween" parent="PlayerHUD/PlayerHands"]
 
 [node name="BoltRifleWeapon" type="Control" parent="PlayerHUD/PlayerHands"]
 script = ExtResource( 12 )
@@ -1160,7 +1126,7 @@ visible = false
 margin_left = 682.482
 margin_top = 46.6444
 margin_right = 722.482
-margin_bottom = 86.6448
+margin_bottom = 86.645
 rect_rotation = -16.5965
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1208,18 +1174,18 @@ __meta__ = {
 }
 
 [node name="LeftHandSprite" type="Sprite" parent="PlayerHUD/PlayerHands/MolotovWeapon/LeftHand"]
-position = Vector2( -181.54, -62.2494 )
-rotation = 0.100987
+position = Vector2( -158.785, -49.5049 )
+rotation = 0.160216
 scale = Vector2( 0.417712, 0.417712 )
 z_index = 2
 texture = ExtResource( 3 )
 
 [node name="LeftFireSprite" type="Sprite" parent="PlayerHUD/PlayerHands/MolotovWeapon/LeftHand"]
-position = Vector2( -74.6636, -289.478 )
+position = Vector2( -39.3381, -274.859 )
 z_index = 1
 texture = ExtResource( 5 )
 hframes = 12
-frame = 3
+frame = 1
 
 [node name="RightHand" type="Control" parent="PlayerHUD/PlayerHands/MolotovWeapon"]
 anchor_left = 0.5
@@ -1231,16 +1197,16 @@ __meta__ = {
 }
 
 [node name="RightHandSprite" type="Sprite" parent="PlayerHUD/PlayerHands/MolotovWeapon/RightHand"]
-position = Vector2( 256.289, -74.751 )
+position = Vector2( 382.772, -92.95 )
+rotation = 0.23876
 scale = Vector2( 0.476698, 0.476698 )
 texture = ExtResource( 7 )
 
 [node name="RightFireSprite" type="Sprite" parent="PlayerHUD/PlayerHands/MolotovWeapon/RightHand"]
-visible = false
-position = Vector2( 69.2029, -219.606 )
+position = Vector2( 229.202, -271.37 )
 texture = ExtResource( 5 )
 hframes = 12
-frame = 11
+frame = 9
 
 [node name="Crosshair" type="TextureRect" parent="PlayerHUD"]
 anchor_left = 0.5
