@@ -3,7 +3,7 @@
 [ext_resource path="res://Enemy/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/fire_spritesheet_color_enemy.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Enemy.tres" type="Material" id=3]
-[ext_resource path="res://Assets/Sprites/enemy_spritesheet.png" type="Texture" id=5]
+[ext_resource path="res://Enemy/zombie_spritesheet.png" type="Texture" id=4]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.49733
@@ -36,7 +36,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.25 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0, 1 ]
+"values": [ 1, 2 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -158,11 +158,11 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.30
 shape = SubResource( 1 )
 
 [node name="EnemySprite" type="Sprite3D" parent="."]
-transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 1, 0, 1.42938, 0 )
+transform = Transform( 0.156, 0, 0, 0, 0.156, 0, 0, 0, 0.156, 0, 1.42938, 0 )
 material_override = ExtResource( 3 )
 billboard = 2
-texture = ExtResource( 5 )
-hframes = 2
+texture = ExtResource( 4 )
+hframes = 3
 frame = 1
 
 [node name="FireSprite" type="Sprite3D" parent="."]
