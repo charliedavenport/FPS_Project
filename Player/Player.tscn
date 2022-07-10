@@ -1018,6 +1018,8 @@ script = ExtResource( 6 )
 
 [node name="WeaponManager" type="Node" parent="."]
 script = ExtResource( 4 )
+molotov_node = NodePath("../PlayerHUD/PlayerHands/MolotovWeapon")
+bolt_rifle_node = NodePath("../PlayerHUD/PlayerHands/BoltRifleWeapon")
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.678883, 0 )
@@ -1033,13 +1035,12 @@ transform = Transform( -1, -6.30363e-08, 1.37208e-07, 0, 0.90869, 0.417471, -1.5
 [node name="RayCast" type="RayCast" parent="Camera"]
 enabled = true
 cast_to = Vector3( 0, 0, -100 )
-collision_mask = 14
+collision_mask = 62
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 0.410807, 0, 0, 0, -1.82704e-08, -0.417978, 0, 0.407516, -1.78131e-08, 0, 0.681093, 0 )
 visible = false
 mesh = SubResource( 2 )
-material/0 = null
 
 [node name="JumpTimer" type="Timer" parent="."]
 wait_time = 0.25
@@ -1053,9 +1054,6 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 script = ExtResource( 11 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="WeaponSwayTween" type="Tween" parent="PlayerHUD/PlayerHands"]
 repeat = true
@@ -1065,9 +1063,6 @@ playback/repeat = true
 
 [node name="BoltRifleWeapon" type="Control" parent="PlayerHUD/PlayerHands"]
 script = ExtResource( 12 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="BoltRifleAnim" type="AnimationPlayer" parent="PlayerHUD/PlayerHands/BoltRifleWeapon"]
 anims/Idle = SubResource( 10 )
@@ -1086,9 +1081,6 @@ margin_top = -28.4327
 margin_right = 8.74854
 margin_bottom = -28.4327
 rect_rotation = 10.1689
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="GunHandSprite" type="Sprite" parent="PlayerHUD/PlayerHands/BoltRifleWeapon/GunHand"]
 position = Vector2( 19.8728, 42.0789 )
@@ -1126,7 +1118,7 @@ visible = false
 margin_left = 682.482
 margin_top = 46.6444
 margin_right = 722.482
-margin_bottom = 86.645
+margin_bottom = 86.6451
 rect_rotation = -16.5965
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1174,39 +1166,38 @@ __meta__ = {
 }
 
 [node name="LeftHandSprite" type="Sprite" parent="PlayerHUD/PlayerHands/MolotovWeapon/LeftHand"]
-position = Vector2( -158.785, -49.5049 )
-rotation = 0.160216
+position = Vector2( -181.54, -62.2494 )
+rotation = 0.100987
 scale = Vector2( 0.417712, 0.417712 )
 z_index = 2
 texture = ExtResource( 3 )
 
 [node name="LeftFireSprite" type="Sprite" parent="PlayerHUD/PlayerHands/MolotovWeapon/LeftHand"]
-position = Vector2( -39.3381, -274.859 )
+position = Vector2( -74.6636, -296.777 )
 z_index = 1
 texture = ExtResource( 5 )
 hframes = 12
-frame = 1
+frame = 3
 
 [node name="RightHand" type="Control" parent="PlayerHUD/PlayerHands/MolotovWeapon"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RightHandSprite" type="Sprite" parent="PlayerHUD/PlayerHands/MolotovWeapon/RightHand"]
-position = Vector2( 382.772, -92.95 )
-rotation = 0.23876
+position = Vector2( 464.554, -104.717 )
+rotation = 0.393135
 scale = Vector2( 0.476698, 0.476698 )
 texture = ExtResource( 7 )
 
 [node name="RightFireSprite" type="Sprite" parent="PlayerHUD/PlayerHands/MolotovWeapon/RightHand"]
-position = Vector2( 229.202, -271.37 )
+position = Vector2( 329.222, -303.73 )
 texture = ExtResource( 5 )
 hframes = 12
-frame = 9
+frame = 11
+
+[node name="Control" type="Control" parent="PlayerHUD/PlayerHands"]
 
 [node name="Crosshair" type="TextureRect" parent="PlayerHUD"]
 anchor_left = 0.5

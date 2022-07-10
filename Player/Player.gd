@@ -2,7 +2,7 @@ extends KinematicBody
 class_name Player
 
 const move_speed: float = 5.0
-export var look_sens: float = .01
+export var look_sens: float = .001
 export var accel: float = 5.0
 export var deaccel: float = 10.0
 export var fall_accel_down: float = 3.0
@@ -138,6 +138,8 @@ func shoot_ray(dmg: float) -> void:
 	if not cam_ray.is_colliding():
 		return
 	var col = cam_ray.get_collider()
+#	if col is EnemyHead:
+#		col.damage(dmg * 2.0)
 	if col is Enemy:
 		col.damage(dmg)
 	elif col is MolotovProjectile:

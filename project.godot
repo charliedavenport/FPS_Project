@@ -78,6 +78,10 @@ window/vsync/use_vsync=false
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/ply/plugin.cfg" )
+
 [input]
 
 forward={
@@ -153,6 +157,7 @@ quit={
 3d_physics/layer_3="Friendly Projectile"
 3d_physics/layer_4="Enemy"
 3d_physics/layer_5="Enemy Projectile"
+3d_physics/layer_6="Enemy Head"
 
 [physics]
 

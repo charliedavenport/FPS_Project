@@ -50,7 +50,6 @@ func _process(delta):
 func set_state(_state : int) -> void:
 	if state == _state:
 		return
-	var prev_state = state
 	state = _state
 	sway_tween.stop_all()
 	return_tween.stop_all()

@@ -8,14 +8,17 @@ class WeaponInfo:
 		name = _name
 		root_node = _root_node
 
+export var molotov_node: NodePath
+export var bolt_rifle_node: NodePath
+
 var active_weapon: int
 var weapons
 
 func _ready() -> void:
-	var molotov_node = get_node("../PlayerHUD/PlayerHands/MolotovWeapon")
-	var bolt_rifle_node = get_node("../PlayerHUD/PlayerHands/BoltRifleWeapon")
-	weapons = [WeaponInfo.new("Bolt Rifle", bolt_rifle_node),\
-			   WeaponInfo.new("Molotov", molotov_node)]
+	#var molotov_node = get_node("../PlayerHUD/PlayerHands/MolotovWeapon")
+	#var bolt_rifle_node = get_node("../PlayerHUD/PlayerHands/BoltRifleWeapon")
+	weapons = [WeaponInfo.new("Bolt Rifle", get_node(bolt_rifle_node)),\
+			   WeaponInfo.new("Molotov", get_node(molotov_node))]
 	yield(get_tree(), "idle_frame")
 	hide_all()
 	active_weapon = -1
