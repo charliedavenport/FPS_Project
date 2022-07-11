@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/crosshair.png" type="Texture" id=2]
@@ -19,6 +19,8 @@
 [ext_resource path="res://Assets/Sprites/muzzle_flash.png" type="Texture" id=17]
 [ext_resource path="res://Assets/Sprites/right_hand.png" type="Texture" id=18]
 [ext_resource path="res://Assets/Sprites/right_hand_foreground.png" type="Texture" id=19]
+[ext_resource path="res://Player/PistolWeapon.gd" type="Script" id=20]
+[ext_resource path="res://Assets/Sprites/pistol.png" type="Texture" id=21]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.407067
@@ -1020,13 +1022,14 @@ script = ExtResource( 6 )
 script = ExtResource( 4 )
 molotov_node = NodePath("../PlayerHUD/PlayerHands/MolotovWeapon")
 bolt_rifle_node = NodePath("../PlayerHUD/PlayerHands/BoltRifleWeapon")
+pistol_node = NodePath("../PlayerHUD/PlayerHands/PistolWeapon")
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.678883, 0 )
 shape = SubResource( 1 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.10125, 0 )
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.10125, 0 )
 fov = 90.0
 
 [node name="MolotovSpawn" type="Spatial" parent="Camera"]
@@ -1197,7 +1200,19 @@ texture = ExtResource( 5 )
 hframes = 12
 frame = 11
 
-[node name="Control" type="Control" parent="PlayerHUD/PlayerHands"]
+[node name="PistolWeapon" type="Control" parent="PlayerHUD/PlayerHands"]
+visible = false
+script = ExtResource( 20 )
+
+[node name="PistolAnim" type="AnimationPlayer" parent="PlayerHUD/PlayerHands/PistolWeapon"]
+
+[node name="GunHand" type="Control" parent="PlayerHUD/PlayerHands/PistolWeapon"]
+
+[node name="PistolHandSprite" type="Sprite" parent="PlayerHUD/PlayerHands/PistolWeapon/GunHand"]
+position = Vector2( 477.515, -140.213 )
+rotation = 0.100645
+scale = Vector2( 0.920632, 0.920632 )
+texture = ExtResource( 21 )
 
 [node name="Crosshair" type="TextureRect" parent="PlayerHUD"]
 anchor_left = 0.5

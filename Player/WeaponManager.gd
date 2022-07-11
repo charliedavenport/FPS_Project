@@ -10,6 +10,7 @@ class WeaponInfo:
 
 export var molotov_node: NodePath
 export var bolt_rifle_node: NodePath
+export var pistol_node: NodePath
 
 var active_weapon: int
 var weapons
@@ -17,8 +18,9 @@ var weapons
 func _ready() -> void:
 	#var molotov_node = get_node("../PlayerHUD/PlayerHands/MolotovWeapon")
 	#var bolt_rifle_node = get_node("../PlayerHUD/PlayerHands/BoltRifleWeapon")
-	weapons = [WeaponInfo.new("Bolt Rifle", get_node(bolt_rifle_node)),\
-			   WeaponInfo.new("Molotov", get_node(molotov_node))]
+	weapons = [WeaponInfo.new("Bolt Rifle", get_node(bolt_rifle_node)),
+			   WeaponInfo.new("Molotov", get_node(molotov_node)),
+			   WeaponInfo.new("Pistol", get_node(pistol_node))]
 	yield(get_tree(), "idle_frame")
 	hide_all()
 	active_weapon = -1
