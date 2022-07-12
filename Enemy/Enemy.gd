@@ -7,10 +7,12 @@ export var fire_tic: float = 0.25
 export var fire_duration: float = 4.0
 export var speed: float = 2.0
 export var gravity: float = 0.5
+export var damage: float = 5.0
 
 var health: float
 var is_on_fire: bool
 var nav_target : Spatial
+var dmg_target
 var vel : Vector3
 
 onready var fireTimer = get_node("FireTimer")
@@ -18,6 +20,10 @@ onready var anim = get_node("AnimationPlayer")
 onready var fireAnim = get_node("FireAnimationPlayer")
 onready var dmgAnim = get_node("DmgAnimationPlayer")
 onready var navAgent = get_node("NavigationAgent")
+onready var hurtBox = get_node("HurtBox")
+onready var dmgTimer = get_node("DmgTimer")
+
+signal dmg_player(dmg)
 
 func _ready():
 	vel = Vector3.ZERO
@@ -27,6 +33,8 @@ func _ready():
 	fireTimer.wait_time = fire_tic
 	is_on_fire = false
 	navAgent.connect("velocity_computed", self, "on_velocity_computed")
+	hurtBox.connect("body_entered", self, "on_hurtbox_entered")
+	hurtBox.connect("body_exited", self, "on_hurtbox_exited")
 
 func _physics_process(delta):
 	apply_gravity()
@@ -42,7 +50,7 @@ func _physics_process(delta):
 
 func on_velocity_computed(safe_vel : Vector3) -> void:
 	print("on velocity computed")
-	move_and_slide(safe_vel)
+	#move_and_slide(safe_vel)
 
 func apply_gravity() -> void:
 	if is_on_floor():
@@ -53,7 +61,7 @@ func apply_gravity() -> void:
 func kill() -> void:
 	queue_free()
 
-func damage(dmg_amt: float) -> void:
+func take_damage(dmg_amt: float) -> void:
 	if dmg_amt == 0:
 		return
 	dmgAnim.play("damaged")
@@ -69,14 +77,31 @@ func fire_damage() -> void:
 #	print("ON FIRE")
 	fireAnim.play("on_fire")
 	for i in range(tics):
-		damage(fire_dmg)
+		take_damage(fire_dmg)
 		fireTimer.start()
 		yield(fireTimer, "timeout")
 		#print("ouch!")
 	fireAnim.play("not_on_fire")
 	is_on_fire = false
 
+func start_attacking() -> void:
+	while dmg_target:
+#		if dmg_target.has_method("take_dmg"):
+#			dmg_target.take_dmg(damage)
+		emit_signal("dmg_player", damage)
+		dmgTimer.start()
+		yield(dmgTimer, "timeout")
+	
+
 func set_nav_target(target : Node) -> void:
 	print("set " + self.name + " nav target: " + target.name)
 	nav_target = target
 #	navAgent.set_target_location(nav_target.global_transform.origin)
+
+func on_hurtbox_entered(body) -> void:
+	dmg_target = body
+	start_attacking()
+
+func on_hurtbox_exited(body) -> void:
+	if dmg_target == body:
+		dmg_target = null

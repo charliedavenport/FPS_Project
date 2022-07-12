@@ -13,6 +13,8 @@ export var max_floor_angle: float = 40.0
 export var max_vertical_rot: float = 1.4 
 export var min_vertical_rot: float = -1.4 
 
+var health: float
+
 var vel: Vector3
 var move_input: Vector3
 var snap: Vector3
@@ -33,6 +35,7 @@ onready var molotov_spawn = get_node("Camera/MolotovSpawn")
 onready var weapon_manager = get_node("WeaponManager")
 
 func _ready():
+	health = 100.0
 	vel = Vector3.ZERO
 	move_input = Vector3.ZERO
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -141,8 +144,16 @@ func shoot_ray(dmg: float) -> void:
 #	if col is EnemyHead:
 #		col.damage(dmg * 2.0)
 	if col is Enemy:
-		col.damage(dmg)
+		col.take_damage(dmg)
 	elif col is MolotovProjectile:
 		col.explode()
 	elif col.get_collision_layer() == 2: # level layer
 		pass # show bullet hole or something
+
+func take_dmg(dmg: float) -> void:
+	health -= dmg
+	if health <= 0.0:
+		die()
+
+func die() -> void:
+	pass
