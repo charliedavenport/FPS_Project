@@ -99,8 +99,9 @@ func set_nav_target(target : Node) -> void:
 #	navAgent.set_target_location(nav_target.global_transform.origin)
 
 func on_hurtbox_entered(body) -> void:
-	dmg_target = body
-	start_attacking()
+	if body.name == "Player":
+		dmg_target = body
+		start_attacking()
 
 func on_hurtbox_exited(body) -> void:
 	if dmg_target == body:

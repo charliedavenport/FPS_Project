@@ -12,6 +12,7 @@ export var molotov_node: NodePath
 export var bolt_rifle_node: NodePath
 export var pistol_node: NodePath
 
+var enabled: bool
 var active_weapon: int
 var weapons
 
@@ -25,6 +26,7 @@ func _ready() -> void:
 	hide_all()
 	active_weapon = -1
 	select_weapon(0)
+	enabled = true
 
 func hide_all() -> void:
 	for w in weapons:
@@ -48,10 +50,16 @@ func get_weapon_by_name(_name: String) -> WeaponInfo:
 	return null
 
 func _input(event):
+	if not enabled:
+		return
 	if event.is_action_pressed("weapon_1"):
 		select_weapon(0)
 	elif event.is_action_pressed("weapon_2"):
 		select_weapon(1)
 	elif event.is_action_pressed("weapon_3"):
 		select_weapon(2)
-		
+
+func enable(val: bool) -> void:
+	enabled = val
+	weapons[active_weapon].root_node.set_process(val)
+	

@@ -22,6 +22,7 @@ var snap: Vector3
 var is_jump_cooldown: bool
 var jump_request: bool
 var is_returning_weapon_center: bool
+var is_alive: bool
 
 var min_floor_y: float
 var floor_y: float
@@ -33,8 +34,10 @@ onready var jump_timer = get_node("JumpTimer")
 onready var molotov_scene = preload("res://Molotov/MolotovProjectile.tscn")
 onready var molotov_spawn = get_node("Camera/MolotovSpawn")
 onready var weapon_manager = get_node("WeaponManager")
+onready var death_anim = get_node("DeathAnim")
 
 func _ready():
+	is_alive = true
 	health = 100.0
 	vel = Vector3.ZERO
 	move_input = Vector3.ZERO
@@ -47,6 +50,8 @@ func _ready():
 	vertical_rot = self.transform.basis.get_euler().x
 	
 func _input(event):
+	if not is_alive:
+		return
 	if event is InputEventMouseMotion:
 		var mouse_delta = event.relative
 		if mouse_delta.y < 0 and vertical_rot < max_vertical_rot:
@@ -137,6 +142,8 @@ func spawn_molotov(speed: float) -> void:
 	molotov_inst.start(molotov_spawn.global_transform, speed, player_forward_vel)
 
 func shoot_ray(dmg: float) -> void:
+	if not is_alive:
+		return
 	cam_ray.force_raycast_update()
 	if not cam_ray.is_colliding():
 		return
@@ -151,9 +158,17 @@ func shoot_ray(dmg: float) -> void:
 		pass # show bullet hole or something
 
 func take_dmg(dmg: float) -> void:
+	if not is_alive:
+		return
 	health -= dmg
 	if health <= 0.0:
 		die()
+		health = 0.0
 
 func die() -> void:
-	pass
+	is_alive = false
+	vel = Vector3.ZERO
+	set_process(false)
+	set_physics_process(false)
+	death_anim.play("Die")
+	weapon_manager.enable(false)
