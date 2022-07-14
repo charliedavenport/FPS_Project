@@ -43,6 +43,9 @@ size = Vector3( 40, 4, 3 )
 [node name="NavigationTest" type="Spatial"]
 script = ExtResource( 4 )
 
+[node name="PlayerSpawn" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.641663, -6.03054 )
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.641663, -6.03054 )
 

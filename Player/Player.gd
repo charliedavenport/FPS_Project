@@ -28,6 +28,8 @@ var min_floor_y: float
 var floor_y: float
 var vertical_rot: float
 
+var spawn_location
+
 onready var cam = get_node("Camera")
 onready var cam_ray = get_node("Camera/RayCast")
 onready var jump_timer = get_node("JumpTimer")
@@ -37,20 +39,18 @@ onready var weapon_manager = get_node("WeaponManager")
 onready var death_anim = get_node("DeathAnim")
 
 func _ready():
-	is_alive = true
-	health = 100.0
-	vel = Vector3.ZERO
-	move_input = Vector3.ZERO
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	is_jump_cooldown = false
 	jump_timer.connect("timeout", self, "on_jump_cooldown")
 	weapon_manager.get_weapon_by_name("Bolt Rifle").root_node.connect("BoltRifleShoot", self, "shoot_ray")
 	is_returning_weapon_center = false
-	min_floor_y = sin((PI/2) - deg2rad(max_floor_angle)) # i <3 trig
+	min_floor_y = sin((PI/2) - deg2rad(max_floor_angle)) # i <3 trig 
 	vertical_rot = self.transform.basis.get_euler().x
+	reset()
 	
 func _input(event):
 	if not is_alive:
+		if event.is_action_pressed("reset"):
+			reset()
 		return
 	if event is InputEventMouseMotion:
 		var mouse_delta = event.relative
@@ -81,7 +81,19 @@ func _physics_process(delta):
 		apply_gravity(delta)
 	#vel = move_and_slide(move_input, Vector3.UP, true, 4, 1.22)
 	vel = move_and_slide_with_snap(move_input, snap, Vector3.UP, true, 4, 0.6)
-	
+
+func reset() -> void:
+	set_process(true)
+	set_physics_process(true)
+	is_alive = true
+	health = 100.0
+	vel = Vector3.ZERO
+	move_input = Vector3.ZERO
+	is_jump_cooldown = false
+	death_anim.play("RESET")
+	weapon_manager.enable(true)
+	if spawn_location:
+		transform = spawn_location.transform
 
 func apply_slope() -> void:
 	# TODO: rotate movement input to be on the plane of a slope

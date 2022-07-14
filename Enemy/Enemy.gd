@@ -94,7 +94,7 @@ func start_attacking() -> void:
 	
 
 func set_nav_target(target : Node) -> void:
-	print("set " + self.name + " nav target: " + target.name)
+#	print("set " + self.name + " nav target: " + target.name)
 	nav_target = target
 #	navAgent.set_target_location(nav_target.global_transform.origin)
 
