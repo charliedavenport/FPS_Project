@@ -19,6 +19,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Enemy/Enemy.gd"
 }, {
+"base": "ResourceFormatLoader",
+"class": "HTerrainDataLoader",
+"language": "GDScript",
+"path": "res://addons/zylann.hterrain/hterrain_resource_loader.gd"
+}, {
+"base": "ResourceFormatSaver",
+"class": "HTerrainDataSaver",
+"language": "GDScript",
+"path": "res://addons/zylann.hterrain/hterrain_resource_saver.gd"
+}, {
 "base": "KinematicBody",
 "class": "MolotovProjectile",
 "language": "GDScript",
@@ -57,6 +67,8 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "BoltRifleWeapon": "",
 "Enemy": "",
+"HTerrainDataLoader": "",
+"HTerrainDataSaver": "",
 "MolotovProjectile": "",
 "MolotovWeapon": "",
 "PistolWeapon": "",
@@ -69,7 +81,7 @@ _global_script_class_icons={
 [application]
 
 config/name="FPS Project"
-run/main_scene="res://NavigationTest.tscn"
+run/main_scene="res://Level/NavigationTerrainTest.tscn"
 config/icon="res://Assets/icon.png"
 
 [debug]
@@ -86,7 +98,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PoolStringArray(  )
+enabled=PoolStringArray( "res://addons/zylann.hterrain/plugin.cfg" )
 
 [input]
 
@@ -173,6 +185,7 @@ reset={
 [physics]
 
 common/enable_pause_aware_picking=true
+3d/physics_engine="Bullet"
 
 [rendering]
 

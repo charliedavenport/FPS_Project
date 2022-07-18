@@ -5,8 +5,8 @@ export var MAX_HEALTH: float = 100.0
 export var fire_dmg: float = 5.0
 export var fire_tic: float = 0.25
 export var fire_duration: float = 4.0
-export var speed: float = 2.0
-export var gravity: float = 0.5
+export var speed: float = 2.5
+export var gravity: float = 0.25
 export var damage: float = 5.0
 
 var health: float
@@ -22,6 +22,7 @@ onready var dmgAnim = get_node("DmgAnimationPlayer")
 onready var navAgent = get_node("NavigationAgent")
 onready var hurtBox = get_node("HurtBox")
 onready var dmgTimer = get_node("DmgTimer")
+onready var groundRayCast = get_node("GroundRayCast")
 
 signal dmg_player(dmg)
 
@@ -53,10 +54,16 @@ func on_velocity_computed(safe_vel : Vector3) -> void:
 	#move_and_slide(safe_vel)
 
 func apply_gravity() -> void:
-	if is_on_floor():
-		vel.y = 0
+#	if is_on_floor():
+#		print("enemy is on floor")
+#		vel.y = 0
+	groundRayCast.force_raycast_update()
+	if groundRayCast.is_colliding():
+		var col = groundRayCast.get_collider()
+		if col.collision_layer == 2:
+			vel.y = 0.0
 	vel.y -= gravity
-	move_and_slide(vel)
+	vel = move_and_slide(vel)
 
 func kill() -> void:
 	queue_free()
@@ -91,7 +98,6 @@ func start_attacking() -> void:
 		emit_signal("dmg_player", damage)
 		dmgTimer.start()
 		yield(dmgTimer, "timeout")
-	
 
 func set_nav_target(target : Node) -> void:
 #	print("set " + self.name + " nav target: " + target.name)

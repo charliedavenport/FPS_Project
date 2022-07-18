@@ -166,7 +166,8 @@ func shoot_ray(dmg: float) -> void:
 		col.take_damage(dmg)
 	elif col is MolotovProjectile:
 		col.explode()
-	elif col.get_collision_layer() == 2: # level layer
+	#elif col.get_collision_layer() == 2: # level layer
+	elif col.collision_layer == 2:
 		pass # show bullet hole or something
 
 func take_dmg(dmg: float) -> void:

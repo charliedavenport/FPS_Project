@@ -102,6 +102,9 @@ material = ExtResource( 3 )
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.17921, 1.27728, -1.21461 )
 
+[node name="Camera" parent="Player" index="4"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.10125, 0 )
+
 [node name="PlayerHands" parent="Player/PlayerHUD" index="0"]
 margin_left = 960.0
 margin_top = 1080.0
