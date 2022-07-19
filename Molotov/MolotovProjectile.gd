@@ -28,6 +28,7 @@ func _physics_process(delta):
 		velocity += Vector3.DOWN * GRAVITY * delta
 		var collision = move_and_collide(velocity * delta)
 		if collision:
+			transform.origin = collision.position
 			explode()
 
 func explode():

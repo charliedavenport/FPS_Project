@@ -208,6 +208,7 @@ radius = 3.5
 height = 7.0
 
 [node name="MolotovProjectile" type="KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 0.980563, 0.196203, 0, -0.196203, 0.980563, 0, 0, 0 )
 collision_layer = 4
 collision_mask = 26
 script = ExtResource( 1 )
@@ -222,11 +223,13 @@ texture = ExtResource( 2 )
 hframes = 6
 
 [node name="ExplosionSprite" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.615, 0 )
 visible = false
+centered = false
+offset = Vector2( -120, -35 )
 billboard = 1
 texture = ExtResource( 3 )
 hframes = 18
+frame = 8
 
 [node name="SecretExplosionSprite" type="Sprite3D" parent="."]
 visible = false
@@ -251,7 +254,6 @@ shape = SubResource( 5 )
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
 visible = false
 mesh = SubResource( 6 )
-material/0 = null
 
 [node name="FireArea" type="Area" parent="."]
 
@@ -261,4 +263,3 @@ shape = SubResource( 7 )
 [node name="MeshInstance" type="MeshInstance" parent="FireArea"]
 visible = false
 mesh = SubResource( 9 )
-material/0 = null
