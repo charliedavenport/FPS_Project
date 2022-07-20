@@ -44,8 +44,11 @@ background_mode = 2
 background_sky = SubResource( 6 )
 background_color = Color( 0.756863, 0.992157, 0.992157, 1 )
 ambient_light_color = Color( 0.32549, 0.466667, 0.517647, 1 )
-fog_color = Color( 0.305882, 0.427451, 0.403922, 1 )
+fog_enabled = true
+fog_color = Color( 0.356863, 0.447059, 0.415686, 1 )
+fog_depth_begin = 5.0
 fog_depth_end = 50.0
+fog_height_max = -5.0
 
 [sub_resource type="BoxShape" id=8]
 extents = Vector3( 4.08175, 13.3242, 65.5143 )
