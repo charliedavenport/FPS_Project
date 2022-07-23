@@ -36,6 +36,5 @@ func make_splash() -> void:
 	var space_state = get_world().direct_space_state
 	var result = space_state.intersect_ray(start_pos, start_pos + Vector3(0, -100, 0))
 	if result.size() > 0:
-		print("rain hit")
 		splashes[cur_splash_ind].global_transform.origin = result.position + Vector3(0, 0.1, 0)
 		splashes[cur_splash_ind].get_node("AnimationPlayer").play("splash")

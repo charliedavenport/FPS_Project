@@ -162,7 +162,7 @@ tracks/0/keys = {
 
 [sub_resource type="Shader" id=13]
 code = "shader_type spatial;
-render_mode unshaded;
+render_mode diffuse_toon;
 
 const int H_FRAMES = 3;
 const int V_FRAMES = 1;
