@@ -7,6 +7,8 @@ const MAX_SPEED: float = 13.0
 
 export var dmg: float = 50.0
 
+onready var audio_stream = get_node("AudioStreamPlayer3D")
+
 var velocity : Vector3
 var alive : bool
 
@@ -36,6 +38,7 @@ func explode():
 	$CollisionShape.disabled = true
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("explosion") # -> on_explosion_end()
+	audio_stream.play()
 	var bodies = $FireArea.get_overlapping_bodies()
 	for bod in bodies:
 		if bod is Enemy:

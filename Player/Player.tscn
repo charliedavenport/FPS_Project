@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/crosshair.png" type="Texture" id=2]
@@ -24,6 +24,8 @@
 [ext_resource path="res://Assets/Roboto-Bold.ttf" type="DynamicFontData" id=22]
 [ext_resource path="res://Assets/Sprites/rain_droplet.png" type="Texture" id=23]
 [ext_resource path="res://Player/RainParticles.gd" type="Script" id=24]
+[ext_resource path="res://Assets/Sound/shots/rifle.wav" type="AudioStream" id=25]
+[ext_resource path="res://Assets/Sound/sfx_throw.wav" type="AudioStream" id=26]
 
 [sub_resource type="Animation" id=18]
 resource_name = "Die"
@@ -370,7 +372,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1875, 0.3125, 0.375, 0.4375, 0.5625, 0.75, 0.8125, 1 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 998.586, 302.367 ), Vector2( 643.801, 36.5537 ), Vector2( 619.602, -53.2746 ), Vector2( 619.602, -53.2746 ), Vector2( 668.756, -24.047 ), Vector2( 668.756, -24.047 ), Vector2( 619.602, -54.9564 ), Vector2( 643.801, 36.5536 ), Vector2( 998.586, 302.367 ) ]
+"values": [ Vector2( 998.586, 302.367 ), Vector2( 589.801, 32.5537 ), Vector2( 575.602, -45.2746 ), Vector2( 575.602, -45.2746 ), Vector2( 620.756, -30.047 ), Vector2( 620.756, -30.047 ), Vector2( 579.602, -66.9564 ), Vector2( 595.305, 23.7541 ), Vector2( 998.586, 302.367 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("RightHand:rect_rotation")
@@ -1213,11 +1215,8 @@ visible = false
 margin_left = 682.482
 margin_top = 46.6444
 margin_right = 722.482
-margin_bottom = 86.645
+margin_bottom = 86.6448
 rect_rotation = -16.5965
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RightHandSprite" type="Sprite" parent="PlayerHUD/PlayerHands/BoltRifleWeapon/RightHand"]
 position = Vector2( 50.9719, 20.6208 )
@@ -1231,6 +1230,10 @@ scale = Vector2( 0.773, 0.773 )
 z_index = 1
 z_as_relative = false
 texture = ExtResource( 19 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PlayerHUD/PlayerHands/BoltRifleWeapon"]
+stream = ExtResource( 25 )
+volume_db = -20.0
 
 [node name="MolotovWeapon" type="Control" parent="PlayerHUD/PlayerHands"]
 visible = false
@@ -1292,6 +1295,10 @@ position = Vector2( 329.222, -303.73 )
 texture = ExtResource( 5 )
 hframes = 12
 frame = 11
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PlayerHUD/PlayerHands/MolotovWeapon"]
+stream = ExtResource( 26 )
+volume_db = -20.0
 
 [node name="PistolWeapon" type="Control" parent="PlayerHUD/PlayerHands"]
 visible = false

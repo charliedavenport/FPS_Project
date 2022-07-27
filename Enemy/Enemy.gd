@@ -9,11 +9,13 @@ export var speed: float = 2.5
 export var gravity: float = 0.25
 export var damage: float = 5.0
 
-var health: float
-var is_on_fire: bool
+var health : float
+var is_on_fire : bool
 var nav_target : Spatial
 var dmg_target
 var vel : Vector3
+var flipped : bool
+var audio_ind : int
 
 onready var fireTimer = get_node("FireTimer")
 onready var anim = get_node("AnimationPlayer")
@@ -23,10 +25,42 @@ onready var navAgent = get_node("NavigationAgent")
 onready var hurtBox = get_node("HurtBox")
 onready var dmgTimer = get_node("DmgTimer")
 onready var groundRayCast = get_node("GroundRayCast")
+onready var mesh = get_node("MeshInstance")
+onready var audio_stream = get_node("AudioStreamPlayer3D")
+onready var audio_timer = get_node("AudioTimer")
+onready var rng = RandomNumberGenerator.new()
+
+const audio_files = [
+	"res://Assets/Sound/zombies/zombie-1.wav",
+	"res://Assets/Sound/zombies/zombie-2.wav",
+	"res://Assets/Sound/zombies/zombie-3.wav",
+	"res://Assets/Sound/zombies/zombie-4.wav",
+	"res://Assets/Sound/zombies/zombie-5.wav",
+	"res://Assets/Sound/zombies/zombie-6.wav",
+	"res://Assets/Sound/zombies/zombie-7.wav",
+	"res://Assets/Sound/zombies/zombie-8.wav",
+	"res://Assets/Sound/zombies/zombie-9.wav",
+	"res://Assets/Sound/zombies/zombie-10.wav",
+	"res://Assets/Sound/zombies/zombie-11.wav",
+	"res://Assets/Sound/zombies/zombie-12.wav",
+	"res://Assets/Sound/zombies/zombie-13.wav",
+	"res://Assets/Sound/zombies/zombie-14.wav",
+	"res://Assets/Sound/zombies/zombie-15.wav",
+	"res://Assets/Sound/zombies/zombie-16.wav",
+	"res://Assets/Sound/zombies/zombie-17.wav",
+	"res://Assets/Sound/zombies/zombie-18.wav",
+	"res://Assets/Sound/zombies/zombie-19.wav",
+	"res://Assets/Sound/zombies/zombie-20.wav",
+	"res://Assets/Sound/zombies/zombie-21.wav",
+	"res://Assets/Sound/zombies/zombie-22.wav",
+	"res://Assets/Sound/zombies/zombie-23.wav",
+	"res://Assets/Sound/zombies/zombie-24.wav"
+]
 
 signal dmg_player(dmg)
 
 func _ready():
+	rng.randomize()
 	vel = Vector3.ZERO
 	health = 100.0
 	anim.play("Idle")
@@ -36,6 +70,7 @@ func _ready():
 	navAgent.connect("velocity_computed", self, "on_velocity_computed")
 	hurtBox.connect("body_entered", self, "on_hurtbox_entered")
 	hurtBox.connect("body_exited", self, "on_hurtbox_exited")
+	do_zombie_audio()
 
 func _physics_process(delta):
 	apply_gravity()
@@ -112,3 +147,17 @@ func on_hurtbox_entered(body) -> void:
 func on_hurtbox_exited(body) -> void:
 	if dmg_target == body:
 		dmg_target = null
+
+func set_flipped(val: bool) -> void:
+	mesh.get_surface_material(0).set_shader_param("flipped", val)
+
+func do_zombie_audio() -> void:
+	audio_ind = rng.randi_range(0, 23)
+	var zombie_sound = load(audio_files[audio_ind % len(audio_files)])
+	audio_stream.stream = zombie_sound
+	while true:
+		audio_timer.wait_time = rng.randf_range(1.0, 3.5)
+		audio_timer.start()
+		yield(audio_timer, "timeout")
+		audio_stream.play()
+		yield(audio_stream, "finished")

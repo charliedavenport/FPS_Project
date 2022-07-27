@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Enemy/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/fire_spritesheet_color_enemy.png" type="Texture" id=2]
-[ext_resource path="res://Enemy/zombie_spritesheet.png" type="Texture" id=4]
+[ext_resource path="res://Enemy/zombie_v2_spritesheet.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.49733
@@ -167,6 +167,7 @@ render_mode diffuse_toon;
 const int H_FRAMES = 3;
 const int V_FRAMES = 1;
 
+uniform bool flipped;
 uniform sampler2D tex : hint_albedo; 
 uniform vec4 flash_color : hint_color = vec4(1.0);
 uniform float flash_modifier : hint_range(0.0,1.0);
@@ -184,6 +185,9 @@ void vertex()
 void fragment() {
 	vec2 new_uv = vec2(((UV.x + float(h_frame)) * 1.0/float(H_FRAMES)), 
 					   ((UV.y + float(v_frame)) * 1.0/float(V_FRAMES)));
+	if (flipped) {
+		new_uv.x = -new_uv.x + ((2.0 * float(h_frame) + 1.0)/3.0);
+	}
 	vec4 col = texture(tex, new_uv);
 	col.rgb = mix(col.rgb, flash_color.rgb, flash_modifier);
 	ALBEDO = col.rgb;
@@ -193,11 +197,12 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id=14]
 resource_local_to_scene = true
 shader = SubResource( 13 )
+shader_param/flipped = false
 shader_param/flash_color = Color( 1, 1, 1, 1 )
 shader_param/flash_modifier = 0.0
 shader_param/h_frame = 0
 shader_param/v_frame = 0
-shader_param/tex = ExtResource( 4 )
+shader_param/tex = ExtResource( 3 )
 
 [sub_resource type="CylinderShape" id=15]
 height = 0.535044
@@ -259,3 +264,8 @@ wait_time = 2.5
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.137308, 0 )
 cast_to = Vector3( 0, -0.5, 0 )
 collision_mask = 2
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+unit_db = -10.0
+
+[node name="AudioTimer" type="Timer" parent="."]

@@ -2,6 +2,7 @@ extends Control
 class_name BoltRifleWeapon
 
 onready var anim = get_node("BoltRifleAnim")
+onready var audio_stream = get_node("AudioStreamPlayer")
 
 const dmg = 75
 
@@ -16,6 +17,7 @@ func _process(delta):
 	if anim.current_animation == "Idle" and Input.is_action_just_pressed("fire"):
 		anim.stop()
 		anim.play("shoot")
+		audio_stream.play()
 		emit_signal("BoltRifleShoot", dmg)
 
 func on_shoot_finished() -> void:

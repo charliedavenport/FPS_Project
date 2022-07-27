@@ -4,6 +4,7 @@ class_name MolotovWeapon
 onready var player = get_node("../../..")
 onready var anim = get_node("MolotovAnim")
 onready var playerHUD = get_node("../..")
+onready var audio_stream = get_node("AudioStreamPlayer")
 
 var molotov_charge: float
 var explosion_secret: bool
@@ -36,6 +37,7 @@ func molotov_fire() -> void:
 func charge_molotov_throw() -> void:
 	while true:
 		if Input.is_action_just_released("fire"):
+			audio_stream.play()
 			return
 		else:
 			molotov_charge += 2.0 # should multiply by delta time?

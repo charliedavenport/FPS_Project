@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/storm_3_siren.ogg-3bf09d480a636158a2706223709a55cf.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sound/storm_3_siren.ogg"
+dest_files=[ "res://.import/storm_3_siren.ogg-3bf09d480a636158a2706223709a55cf.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

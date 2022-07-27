@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/zombie-23.wav-a094ef9827abe60fd2d31b31c32d51c5.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/zombies/zombie-23.wav"
+dest_files=[ "res://.import/zombie-23.wav-a094ef9827abe60fd2d31b31c32d51c5.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
