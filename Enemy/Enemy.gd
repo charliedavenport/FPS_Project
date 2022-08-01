@@ -8,6 +8,9 @@ export var fire_duration: float = 4.0
 export var speed: float = 2.5
 export var gravity: float = 0.25
 export var damage: float = 5.0
+export var avoid_zombie_amount: float = 0.5
+export var max_nearby_zombies: int = 0
+export var nav_update_delay: float = 1.0
 
 var health : float
 var is_on_fire : bool
@@ -16,7 +19,11 @@ var dmg_target
 var vel : Vector3
 var flipped : bool
 var audio_ind : int
+var nearby_enemies = []
+var vel_offset_angle : float
+var target_pos : Vector3
 
+onready var rng = RandomNumberGenerator.new()
 onready var fireTimer = get_node("FireTimer")
 onready var anim = get_node("AnimationPlayer")
 onready var fireAnim = get_node("FireAnimationPlayer")
@@ -28,7 +35,9 @@ onready var groundRayCast = get_node("GroundRayCast")
 onready var mesh = get_node("MeshInstance")
 onready var audio_stream = get_node("AudioStreamPlayer3D")
 onready var audio_timer = get_node("AudioTimer")
-onready var rng = RandomNumberGenerator.new()
+onready var nav_update_timer = get_node("NavUpdateTimer")
+onready var nearby_enemies_area = get_node("NearbyEnemiesArea")
+onready var player_cam = get_viewport().get_camera()
 
 const audio_files = [
 	"res://Assets/Sound/zombies/zombie-1.wav",
@@ -67,38 +76,67 @@ func _ready():
 	fireAnim.play("not_on_fire")
 	fireTimer.wait_time = fire_tic
 	is_on_fire = false
-	navAgent.connect("velocity_computed", self, "on_velocity_computed")
+	target_pos = global_transform.origin
+	nav_update_delay = rng.randf_range(nav_update_delay - 0.5, nav_update_delay + 0.5)
 	hurtBox.connect("body_entered", self, "on_hurtbox_entered")
 	hurtBox.connect("body_exited", self, "on_hurtbox_exited")
+	nearby_enemies_area.connect("body_entered", self, "on_nearby_enemy_entered")
+	nearby_enemies_area.connect("body_exited", self, "on_nearby_enemy_exited")
+	navAgent.connect("velocity_computed", self, "on_nav_velocity_computed")
 	do_zombie_audio()
+
+func _process(delta):
+	var enemy_to_player = (player_cam.global_transform.origin - global_transform.origin).normalized()
+	var forward_dir = transform.basis.z.normalized()
+	var enemy_to_player_2D = Vector2(enemy_to_player.x, enemy_to_player.z)
+	var forward_dir_2D = Vector2(forward_dir.x, forward_dir.z)
+	var angle = forward_dir_2D.angle_to(enemy_to_player_2D)
+	var v_frame := 0
+	if (angle < -3.0 * PI / 4.0) or (angle > 3.0 * PI / 4.0):
+		v_frame = 2 # behind
+	elif angle > PI / 4.0:
+		v_frame = 3 # right
+	elif angle > -1.0 * PI / 4.0:
+		v_frame = 0 # front
+	elif angle > -3.0 * PI / 4.0:
+		v_frame = 1 # left
+	mesh.get_surface_material(0).set_shader_param("v_frame", v_frame)
 
 func _physics_process(delta):
 	apply_gravity()
 	if not nav_target:
 		return
-	navAgent.set_target_location(nav_target.global_transform.origin)
 	var current_pos = global_transform.origin
-	var target_pos = navAgent.get_next_location()
+	#var target_pos = navAgent.get_next_location()
 	var move_vel_offset = (target_pos - current_pos).normalized() * speed
 	vel.x = move_vel_offset.x
 	vel.z = move_vel_offset.z
-	navAgent.set_velocity(vel)
+	avoid_zombies()
+	vel = move_and_slide(vel)
+	#navAgent.set_velocity(vel)
 
-func on_velocity_computed(safe_vel : Vector3) -> void:
-	print("on velocity computed")
-	#move_and_slide(safe_vel)
+func on_nav_velocity_computed(safe_velocity) -> void:
+	vel = move_and_slide(safe_velocity)
 
 func apply_gravity() -> void:
-#	if is_on_floor():
-#		print("enemy is on floor")
-#		vel.y = 0
 	groundRayCast.force_raycast_update()
 	if groundRayCast.is_colliding():
 		var col = groundRayCast.get_collider()
 		if col.collision_layer == 2:
 			vel.y = 0.0
 	vel.y -= gravity
-	vel = move_and_slide(vel)
+
+func avoid_zombies() -> void:
+	var angle_sum: float
+	for zombie in nearby_enemies:
+		var offset = zombie.global_transform.origin - global_transform.origin
+		var offset_2D = Vector2(offset.x, offset.z).normalized()
+		var forward_dir_2D = Vector2(vel.x, vel.z).normalized()
+		var angle = forward_dir_2D.angle_to(offset_2D)
+		if abs(angle) < TAU / 4.0:
+			angle_sum += angle
+	vel_offset_angle = lerp(vel_offset_angle, angle_sum, 0.2)
+	vel = vel.rotated(Vector3.UP, vel_offset_angle * avoid_zombie_amount)
 
 func kill() -> void:
 	queue_free()
@@ -116,7 +154,6 @@ func fire_damage() -> void:
 #		return
 	is_on_fire = true
 	var tics = int(fire_duration/fire_tic)
-#	print("ON FIRE")
 	fireAnim.play("on_fire")
 	for i in range(tics):
 		take_damage(fire_dmg)
@@ -134,10 +171,20 @@ func start_attacking() -> void:
 		dmgTimer.start()
 		yield(dmgTimer, "timeout")
 
+func start_updating_target_pos() -> void:
+	nav_update_timer.wait_time = nav_update_delay
+	while nav_target:
+		navAgent.set_target_location(nav_target.global_transform.origin)
+		target_pos = navAgent.get_next_location()
+		nav_update_timer.start()
+		yield(nav_update_timer, "timeout")
+
 func set_nav_target(target : Node) -> void:
-#	print("set " + self.name + " nav target: " + target.name)
 	nav_target = target
-#	navAgent.set_target_location(nav_target.global_transform.origin)
+	start_updating_target_pos()
+
+func clear_nav_target() -> void:
+	nav_target = null
 
 func on_hurtbox_entered(body) -> void:
 	if body.name == "Player":
@@ -147,6 +194,14 @@ func on_hurtbox_entered(body) -> void:
 func on_hurtbox_exited(body) -> void:
 	if dmg_target == body:
 		dmg_target = null
+
+func on_nearby_enemy_entered(body) -> void:
+	if not nearby_enemies.has(body) and len(nearby_enemies) < max_nearby_zombies:
+		nearby_enemies.append(body)
+
+func on_nearby_enemy_exited(body) -> void:
+	if nearby_enemies.has(body):
+		nearby_enemies.erase(body)
 
 func set_flipped(val: bool) -> void:
 	mesh.get_surface_material(0).set_shader_param("flipped", val)
