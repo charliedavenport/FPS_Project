@@ -87,7 +87,8 @@ func _ready():
 
 func _process(delta):
 	var enemy_to_player = (player_cam.global_transform.origin - global_transform.origin).normalized()
-	var forward_dir = transform.basis.z.normalized()
+	var forward_dir = vel
+#	var forward_dir = transform.basis.z.normalized()
 	var enemy_to_player_2D = Vector2(enemy_to_player.x, enemy_to_player.z)
 	var forward_dir_2D = Vector2(forward_dir.x, forward_dir.z)
 	var angle = forward_dir_2D.angle_to(enemy_to_player_2D)

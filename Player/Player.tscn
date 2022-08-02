@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/crosshair.png" type="Texture" id=2]
@@ -22,8 +22,6 @@
 [ext_resource path="res://Player/PistolWeapon.gd" type="Script" id=20]
 [ext_resource path="res://Assets/Sprites/pistol.png" type="Texture" id=21]
 [ext_resource path="res://Assets/Roboto-Bold.ttf" type="DynamicFontData" id=22]
-[ext_resource path="res://Assets/Sprites/rain_droplet.png" type="Texture" id=23]
-[ext_resource path="res://Player/RainParticles.gd" type="Script" id=24]
 [ext_resource path="res://Assets/Sound/shots/rifle.wav" type="AudioStream" id=25]
 [ext_resource path="res://Assets/Sound/sfx_throw.wav" type="AudioStream" id=26]
 
@@ -1086,17 +1084,6 @@ outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 22 )
 
-[sub_resource type="SpatialMaterial" id=22]
-flags_transparent = true
-flags_unshaded = true
-params_blend_mode = 1
-params_billboard_mode = 2
-albedo_color = Color( 1, 1, 1, 0.443137 )
-albedo_texture = ExtResource( 23 )
-
-[sub_resource type="QuadMesh" id=23]
-material = SubResource( 22 )
-
 [node name="Player" type="KinematicBody"]
 pause_mode = 1
 collision_mask = 218
@@ -1372,23 +1359,3 @@ custom_fonts/font = SubResource( 17 )
 text = "100"
 align = 1
 valign = 1
-
-[node name="RainParticles" type="CPUParticles" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0 )
-amount = 200
-lifetime = 1.5
-preprocess = 1.0
-speed_scale = 2.0
-local_coords = false
-mesh = SubResource( 23 )
-emission_shape = 2
-emission_box_extents = Vector3( 25, 0.5, 25 )
-flag_align_y = true
-direction = Vector3( 0, -1, 0 )
-spread = 0.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 25.0
-script = ExtResource( 24 )
-splash_area = 25.0
-splashes_per_second = 150.0
-splash_pool_size = 100
