@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Assets/Sprites/rainSplash.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Sprites/rain_droplet.png" type="Texture" id=2]
@@ -83,7 +83,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.05, 0.15 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0.01, 0.01, 0.01 ), Vector3( 0.15, 0.15, 0.15 ), Vector3( 0.01, 0.01, 0.01 ) ]
+"values": [ Vector3( 0.01, 0.01, 0.01 ), Vector3( 0.1, 0.1, 0.1 ), Vector3( 0.01, 0.01, 0.01 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Splash:visible")
@@ -119,18 +119,12 @@ params_billboard_keep_scale = true
 albedo_color = Color( 1, 1, 1, 0.254902 )
 albedo_texture = ExtResource( 2 )
 
-[sub_resource type="CylinderShape" id=7]
-height = 1.94896
-radius = 0.236615
-
-[node name="RainDrop" type="KinematicBody"]
+[node name="RainDrop" type="Spatial"]
 visible = false
-collision_layer = 0
-collision_mask = 2
 script = ExtResource( 3 )
 
 [node name="Splash" type="Sprite3D" parent="."]
-transform = Transform( 0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0 )
+transform = Transform( 0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0 )
 visible = false
 material_override = SubResource( 1 )
 offset = Vector2( 0, 100 )
@@ -144,10 +138,7 @@ anims/splash = SubResource( 3 )
 
 [node name="Drop" type="Sprite3D" parent="."]
 transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0 )
+visible = false
 material_override = SubResource( 6 )
 billboard = 2
 texture = ExtResource( 2 )
-
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.799281, 0 )
-shape = SubResource( 7 )

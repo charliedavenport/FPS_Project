@@ -11,6 +11,7 @@ export var damage: float = 5.0
 export var avoid_zombie_amount: float = 0.5
 export var max_nearby_zombies: int = 0
 export var nav_update_delay: float = 1.0
+export var max_blood_particles: int = 10
 
 var health : float
 var is_on_fire : bool
@@ -22,8 +23,11 @@ var audio_ind : int
 var nearby_enemies = []
 var vel_offset_angle : float
 var target_pos : Vector3
+var blood_bucket : Array
+var cur_blood_ind : int
 
 onready var rng = RandomNumberGenerator.new()
+onready var player_cam = get_viewport().get_camera()
 onready var fireTimer = get_node("FireTimer")
 onready var anim = get_node("AnimationPlayer")
 onready var fireAnim = get_node("FireAnimationPlayer")
@@ -37,7 +41,8 @@ onready var audio_stream = get_node("AudioStreamPlayer3D")
 onready var audio_timer = get_node("AudioTimer")
 onready var nav_update_timer = get_node("NavUpdateTimer")
 onready var nearby_enemies_area = get_node("NearbyEnemiesArea")
-onready var player_cam = get_viewport().get_camera()
+onready var death_timer = get_node("DeathTimer")
+onready var head_area = get_node("HeadArea")
 
 const audio_files = [
 	"res://Assets/Sound/zombies/zombie-1.wav",
@@ -65,6 +70,8 @@ const audio_files = [
 	"res://Assets/Sound/zombies/zombie-23.wav",
 	"res://Assets/Sound/zombies/zombie-24.wav"
 ]
+const blood_particles_scene = preload("res://Enemy/BloodParticles.tscn")
+const headshot_blood_scene = preload("res://Enemy/HeadShotBloodParticles.tscn")
 
 signal dmg_player(dmg)
 
@@ -76,6 +83,7 @@ func _ready():
 	fireAnim.play("not_on_fire")
 	fireTimer.wait_time = fire_tic
 	is_on_fire = false
+	init_blood_particles()
 	target_pos = global_transform.origin
 	nav_update_delay = rng.randf_range(nav_update_delay - 0.5, nav_update_delay + 0.5)
 	hurtBox.connect("body_entered", self, "on_hurtbox_entered")
@@ -83,7 +91,16 @@ func _ready():
 	nearby_enemies_area.connect("body_entered", self, "on_nearby_enemy_entered")
 	nearby_enemies_area.connect("body_exited", self, "on_nearby_enemy_exited")
 	navAgent.connect("velocity_computed", self, "on_nav_velocity_computed")
+	head_area.connect("taken_headshot", self, "on_headshot_taken")
 	do_zombie_audio()
+
+func init_blood_particles() -> void:
+	blood_bucket = []
+	cur_blood_ind = 0
+	for i in range(max_blood_particles):
+		var blood = blood_particles_scene.instance()
+		blood_bucket.append(blood)
+		call_deferred("add_child", blood)
 
 func _process(delta):
 	var enemy_to_player = (player_cam.global_transform.origin - global_transform.origin).normalized()
@@ -140,6 +157,10 @@ func avoid_zombies() -> void:
 	vel = vel.rotated(Vector3.UP, vel_offset_angle * avoid_zombie_amount)
 
 func kill() -> void:
+	anim.stop(false)
+	nav_target = null
+	death_timer.start()
+	yield(death_timer, "timeout")
 	queue_free()
 
 func take_damage(dmg_amt: float) -> void:
@@ -149,6 +170,11 @@ func take_damage(dmg_amt: float) -> void:
 	health -= dmg_amt
 	if health <= 0.0:
 		kill()
+
+func show_blood(location: Vector3) -> void:
+	blood_bucket[cur_blood_ind].global_transform.origin = location
+	blood_bucket[cur_blood_ind].emitting = true
+	cur_blood_ind += 1
 
 func fire_damage() -> void:
 #	if is_on_fire:
@@ -203,6 +229,13 @@ func on_nearby_enemy_entered(body) -> void:
 func on_nearby_enemy_exited(body) -> void:
 	if nearby_enemies.has(body):
 		nearby_enemies.erase(body)
+
+func on_headshot_taken(position: Vector3) -> void:
+	var headshot = headshot_blood_scene.instance()
+	headshot.transform.origin = head_area.transform.origin
+	headshot.emitting = true
+	kill()
+	call_deferred("add_child", headshot)
 
 func set_flipped(val: bool) -> void:
 	mesh.get_surface_material(0).set_shader_param("flipped", val)

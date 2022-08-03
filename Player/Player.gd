@@ -3,8 +3,8 @@ class_name Player
 
 const move_speed: float = 5.0
 export var look_sens: float = .001
-export var accel: float = 5.0
-export var deaccel: float = 10.0
+export var accel: float = 0.05
+export var deaccel: float = 0.1
 export var fall_accel_down: float = 3.0
 export var fall_accel_up: float = 1.0
 export var max_fall_speed: float = -15.0
@@ -110,9 +110,9 @@ func apply_slope() -> void:
 func apply_move_acceleration(delta: float) -> void:
 	var wish_dir = move_input * move_speed
 	if wish_dir.dot(move_input) > 0:
-		move_input = vel.linear_interpolate(wish_dir, accel*delta)
+		move_input = vel.linear_interpolate(wish_dir, accel)
 	else:
-		move_input = vel.linear_interpolate(wish_dir, deaccel*delta)
+		move_input = vel.linear_interpolate(wish_dir, deaccel)
 
 func apply_jump() -> void:
 	move_input.y += jump_speed
@@ -162,8 +162,12 @@ func shoot_ray(dmg: float) -> void:
 	var col = cam_ray.get_collider()
 #	if col is EnemyHead:
 #		col.damage(dmg * 2.0)
+	if cam_ray.get_collision_mask_bit(5): # enemy headshot
+		if col.has_method("headshot"):
+			col.headshot(cam_ray.get_collision_point())
 	if col is Enemy:
 		col.take_damage(dmg)
+		col.show_blood(cam_ray.get_collision_point())
 	elif col is MolotovProjectile:
 		col.explode()
 	#elif col.get_collision_layer() == 2: # level layer

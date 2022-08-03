@@ -1,12 +1,16 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Enemy/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/fire_spritesheet_color_enemy.png" type="Texture" id=2]
 [ext_resource path="res://Enemy/zombie_v2_2_spritesheet.png" type="Texture" id=3]
+[ext_resource path="res://Enemy/HeadArea.gd" type="Script" id=4]
+
+[sub_resource type="SphereShape" id=17]
+radius = 0.422253
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
-height = 1.64178
+height = 1.39935
 
 [sub_resource type="Animation" id=4]
 resource_name = "Idle"
@@ -225,8 +229,17 @@ radius = 3.0
 neighbor_dist = 5.0
 max_speed = 2.5
 
+[node name="HeadArea" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.42152, 0 )
+collision_layer = 32
+collision_mask = 0
+script = ExtResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="HeadArea"]
+shape = SubResource( 17 )
+
 [node name="MoveCollision" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.30485, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.21161, -4.07555e-09 )
 shape = SubResource( 1 )
 
 [node name="FireSprite" type="Sprite3D" parent="."]
@@ -289,3 +302,6 @@ collision_mask = 8
 
 [node name="CollisionShape" type="CollisionShape" parent="NearbyEnemiesArea"]
 shape = SubResource( 16 )
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 0.75
