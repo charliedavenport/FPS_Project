@@ -111,13 +111,17 @@ func _process(delta):
 	var angle = forward_dir_2D.angle_to(enemy_to_player_2D)
 	var v_frame := 0
 	if (angle < -3.0 * PI / 4.0) or (angle > 3.0 * PI / 4.0):
-		v_frame = 2 # behind
-	elif angle > PI / 4.0:
-		v_frame = 3 # right
-	elif angle > -1.0 * PI / 4.0:
+		v_frame = 3 # behind
+	elif angle > 3.0 * PI / 8.0:
+		v_frame = 4 # right
+	elif angle > 1.0 * PI / 8.0:
+		v_frame = 5 # right-three-quarters
+	elif angle > -1.0 * PI / 8.0:
 		v_frame = 0 # front
+	elif angle > -3.0 * PI / 8.0:
+		v_frame = 1 # left-three-quarters
 	elif angle > -3.0 * PI / 4.0:
-		v_frame = 1 # left
+		v_frame = 2 # left
 	mesh.get_surface_material(0).set_shader_param("v_frame", v_frame)
 
 func _physics_process(delta):

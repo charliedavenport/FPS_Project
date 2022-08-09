@@ -2,7 +2,7 @@ shader_type spatial;
 render_mode diffuse_toon;
 
 const int H_FRAMES = 3;
-const int V_FRAMES = 4;
+const int V_FRAMES = 6;
 
 uniform bool flipped;
 uniform sampler2D tex : hint_albedo; 
