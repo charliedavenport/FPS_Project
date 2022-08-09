@@ -63,3 +63,6 @@ func set_state(_state : int) -> void:
 					rect_position, hands_idle,
 					return_to_center_time, Tween.TRANS_LINEAR)
 			return_tween.start()
+
+func set_modulate(color : Color) -> void:
+	pass

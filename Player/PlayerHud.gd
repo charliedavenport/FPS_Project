@@ -42,3 +42,13 @@ func _process(delta):
 	#vert_look_angle = rad2deg(player_cam.transform.basis.get_euler().x)
 	statsText.text = stat_text % [vel, speed, fps, mem, vram, is_on_floor]
 	playerHealthLabel.text = str(player.health)
+
+func begin_molotov_charge() -> void:
+	molotovChargeBar.visible = true
+
+func update_molotov_charge(charge) -> void:
+	molotovChargeBar.value = charge
+
+func end_molotov_charge() -> void:
+	molotovChargeBar.visible = false
+ 

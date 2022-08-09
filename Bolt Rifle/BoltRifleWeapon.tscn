@@ -1,0 +1,559 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Player/BoltRifleWeapon.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/gun_foreground.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/bolt_lever.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/bolt_action.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/rifle_hand.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Sprites/muzzle_flash.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sprites/right_hand_foreground.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sprites/right_hand.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Sound/shots/rifle.wav" type="AudioStream" id=9]
+
+[sub_resource type="Animation" id=10]
+resource_name = "Idle"
+loop = true
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("GunHand/MuzzleFlashSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("GunHand:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 253.242, -152.872 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("GunHand/BoltSprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 241.908, 108.877 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("GunHand/BoltSprite:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("GunHand/BoltActionSprite:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 148.739, 107.432 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("GunHand/BoltActionSprite:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("GunHand:rect_rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("RightHand:rect_rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("RightHand:rect_position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 889.927, 203.763 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("RightHand:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=12]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("GunHand:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 8.74854, -28.4327 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("GunHand:rect_rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 10.1689 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("GunHand/MuzzleFlashSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("GunHand/BoltSprite:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 241.908, 108.877 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("GunHand/BoltSprite:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("GunHand/BoltActionSprite:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 148.739, 107.432 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("GunHand/BoltActionSprite:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("RightHand:rect_position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 682.482, 46.6444 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("RightHand:rect_rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -16.5965 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("RightHand:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "bolt"
+step = 0.0625
+tracks/0/type = "value"
+tracks/0/path = NodePath("GunHand:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1875, 0.8125, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 253.242, -152.872 ), Vector2( 158.346, -57.6918 ), Vector2( 158.346, -57.6918 ), Vector2( 253.242, -152.872 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("GunHand:rect_rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1875, 0.8125, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -21.4656, -21.4656, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("RightHand:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1875, 0.3125, 0.375, 0.4375, 0.5625, 0.75, 0.8125, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 998.586, 302.367 ), Vector2( 589.801, 32.5537 ), Vector2( 575.602, -45.2746 ), Vector2( 575.602, -45.2746 ), Vector2( 620.756, -30.047 ), Vector2( 620.756, -30.047 ), Vector2( 579.602, -66.9564 ), Vector2( 595.305, 23.7541 ), Vector2( 998.586, 302.367 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("RightHand:rect_rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1875, 0.3125, 0.375, 0.75, 0.8125, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -16.5965, -24.1298, -24.1298, -24.1298, -16.5965, 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("GunHand/BoltSprite:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1875, 0.3125, 0.375, 0.4375, 0.5625, 0.75, 0.8125, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 241.908, 108.877 ), Vector2( 241.908, 108.877 ), Vector2( 239.752, 61.588 ), Vector2( 239.752, 61.588 ), Vector2( 271.671, 105.545 ), Vector2( 271.671, 105.545 ), Vector2( 239.752, 61.588 ), Vector2( 241.908, 108.877 ), Vector2( 241.908, 108.877 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("GunHand/BoltSprite:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1875, 0.3125, 0.375, 0.75, 0.8125, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, -30.3694, -30.3694, -30.3694, 0.0, 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("GunHand/BoltActionSprite:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.3125, 0.375, 0.4375, 0.5625, 0.75, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 148.739, 107.432 ), Vector2( 148.739, 107.432 ), Vector2( 148.739, 107.432 ), Vector2( 180.657, 151.389 ), Vector2( 180.657, 151.389 ), Vector2( 148.739, 107.432 ), Vector2( 148.739, 107.432 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("GunHand/BoltActionSprite:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.75, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0 ]
+}
+tracks/8/type = "method"
+tracks/8/path = NodePath(".")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "on_bolt_finished"
+} ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("RightHand:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "equip"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("GunHand:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -69.705, 149.658 ), Vector2( 175.531, -104.336 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("GunHand:rect_rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -33.0329, 0.0 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "on_equip_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "shoot"
+length = 0.1875
+step = 0.0625
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1875 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "on_shoot_finished"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("GunHand/MuzzleFlashSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1875 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("GunHand:rect_rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.0625, 0.1875 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 14.8655, 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("GunHand:rect_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.0625, 0.1875 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 253.242, -152.872 ), Vector2( 332.936, -190.079 ), Vector2( 253.242, -152.872 ) ]
+}
+
+[node name="BoltRifleWeapon" type="Control"]
+script = ExtResource( 1 )
+
+[node name="BoltRifleAnim" type="AnimationPlayer" parent="."]
+anims/Idle = SubResource( 10 )
+anims/RESET = SubResource( 12 )
+anims/bolt = SubResource( 13 )
+anims/equip = SubResource( 14 )
+anims/shoot = SubResource( 11 )
+
+[node name="GunHand" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 8.74854
+margin_top = -28.4327
+margin_right = 8.74854
+margin_bottom = -28.4327
+rect_rotation = 10.1689
+
+[node name="GunHandSprite" type="Sprite" parent="GunHand"]
+position = Vector2( 19.8728, 42.0789 )
+scale = Vector2( 0.773079, 0.773079 )
+texture = ExtResource( 5 )
+
+[node name="GunForegroundSprite" type="Sprite" parent="GunHand"]
+position = Vector2( 72.3811, 30.0447 )
+scale = Vector2( 0.773, 0.773 )
+z_index = 3
+texture = ExtResource( 2 )
+
+[node name="BoltSprite" type="Sprite" parent="GunHand"]
+position = Vector2( 241.908, 108.877 )
+scale = Vector2( 0.773, 0.773 )
+z_index = 1
+texture = ExtResource( 3 )
+
+[node name="BoltActionSprite" type="Sprite" parent="GunHand"]
+position = Vector2( 148.739, 107.432 )
+scale = Vector2( 0.773, 0.773 )
+z_index = 2
+texture = ExtResource( 4 )
+
+[node name="MuzzleFlashSprite" type="Sprite" parent="GunHand"]
+visible = false
+position = Vector2( -115.839, -188.184 )
+rotation = -2.42377
+scale = Vector2( 1.21138, 1.21138 )
+z_index = -1
+texture = ExtResource( 6 )
+
+[node name="RightHand" type="Control" parent="."]
+visible = false
+margin_left = 682.482
+margin_top = 46.6444
+margin_right = 722.482
+margin_bottom = 86.6448
+rect_rotation = -16.5965
+
+[node name="RightHandSprite" type="Sprite" parent="RightHand"]
+position = Vector2( 50.9719, 20.6208 )
+scale = Vector2( 0.773, 0.773 )
+z_as_relative = false
+texture = ExtResource( 8 )
+
+[node name="RHForegroundSprite" type="Sprite" parent="RightHand"]
+position = Vector2( -100.465, -135.949 )
+scale = Vector2( 0.773, 0.773 )
+z_index = 1
+z_as_relative = false
+texture = ExtResource( 7 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -20.0

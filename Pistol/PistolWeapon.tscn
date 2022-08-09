@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Player/PistolWeapon.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/pistol.png" type="Texture" id=2]
+
+[node name="PistolWeapon" type="Control"]
+visible = false
+script = ExtResource( 1 )
+
+[node name="PistolAnim" type="AnimationPlayer" parent="."]
+
+[node name="GunHand" type="Control" parent="."]
+
+[node name="PistolHandSprite" type="Sprite" parent="GunHand"]
+position = Vector2( 477.515, -140.213 )
+rotation = 0.100645
+scale = Vector2( 0.920632, 0.920632 )
+texture = ExtResource( 2 )

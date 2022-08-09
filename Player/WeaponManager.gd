@@ -38,6 +38,7 @@ func select_weapon(_index: int) -> void:
 		return
 	weapons[active_weapon].root_node.set_process(false)
 	weapons[active_weapon].root_node.visible = false
+	weapons[active_weapon].root_node.disable()
 	active_weapon = _index
 	weapons[active_weapon].root_node.set_process(true)
 	weapons[active_weapon].root_node.visible = true

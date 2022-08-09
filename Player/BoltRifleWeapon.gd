@@ -13,6 +13,9 @@ func enable() -> void:
 		anim = get_node("BoltRifleAnim")
 	anim.play("equip")
 
+func disable() -> void:
+	pass
+
 func _process(delta):
 	if anim.current_animation == "Idle" and Input.is_action_just_pressed("fire"):
 		anim.stop()

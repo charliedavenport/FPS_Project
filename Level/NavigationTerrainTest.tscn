@@ -79,7 +79,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22.9731, 0 )
 rain_bucket_size = 500
 radius = 30.0
 drop_speed = 40.0
-drops_per_second = 500.0
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.902515, -0.429404, 0.0328469, -0.271587, -0.508305, 0.817231, -0.334226, -0.746484, -0.575374, 0.18084, 6.90908, -0.184284 )

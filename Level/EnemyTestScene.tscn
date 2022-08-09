@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Assets/wood_material.tres" type="Material" id=1]
+[ext_resource path="res://Assets/grid_material.tres" type="Material" id=1]
 [ext_resource path="res://Enemy/Enemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=3]
 

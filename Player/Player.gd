@@ -37,11 +37,16 @@ onready var molotov_scene = preload("res://Molotov/MolotovProjectile.tscn")
 onready var molotov_spawn = get_node("Camera/MolotovSpawn")
 onready var weapon_manager = get_node("WeaponManager")
 onready var death_anim = get_node("DeathAnim")
+onready var player_hud = get_node("PlayerHUD")
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	jump_timer.connect("timeout", self, "on_jump_cooldown")
 	weapon_manager.get_weapon_by_name("Bolt Rifle").root_node.connect("BoltRifleShoot", self, "shoot_ray")
+	weapon_manager.get_weapon_by_name("Molotov").root_node.connect("spawn_molotov", self, "spawn_molotov")
+	weapon_manager.get_weapon_by_name("Molotov").root_node.connect("begin_molotov_charge", player_hud, "begin_molotov_charge")
+	weapon_manager.get_weapon_by_name("Molotov").root_node.connect("end_molotov_charge", player_hud, "end_molotov_charge")
+	weapon_manager.get_weapon_by_name("Molotov").root_node.connect("update_molotov_charge", player_hud, "update_molotov_charge")
 	is_returning_weapon_center = false
 	min_floor_y = sin((PI/2) - deg2rad(max_floor_angle)) # i <3 trig 
 	vertical_rot = self.transform.basis.get_euler().x
