@@ -9,6 +9,7 @@ data = PoolVector3Array( 6.1438, 4.338, 6.1438, 6.1438, 4.7174, -6.1438, 6.1438,
 [node name="cabin" instance=ExtResource( 1 )]
 
 [node name="Cube" parent="." index="0"]
+use_in_baked_light = true
 material/0 = ExtResource( 2 )
 
 [node name="StaticBody" type="StaticBody" parent="Cube" index="0"]

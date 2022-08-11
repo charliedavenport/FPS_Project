@@ -43,6 +43,7 @@ onready var nav_update_timer = get_node("NavUpdateTimer")
 onready var nearby_enemies_area = get_node("NearbyEnemiesArea")
 onready var death_timer = get_node("DeathTimer")
 onready var head_area = get_node("HeadArea")
+onready var headshot_audio_stream = get_node("HeadshotAudioStream")
 
 const audio_files = [
 	"res://Assets/Sound/zombies/zombie-1.wav",
@@ -70,6 +71,9 @@ const audio_files = [
 	"res://Assets/Sound/zombies/zombie-23.wav",
 	"res://Assets/Sound/zombies/zombie-24.wav"
 ]
+const headshot_sounds = \
+	[preload("res://Assets/Sound/splat/impactsplat01.mp3"),
+	 preload("res://Assets/Sound/splat/impactsplat03.mp3")]
 const blood_particles_scene = preload("res://Enemy/BloodParticles.tscn")
 const headshot_blood_scene = preload("res://Enemy/HeadShotBloodParticles.tscn")
 
@@ -235,6 +239,9 @@ func on_nearby_enemy_exited(body) -> void:
 		nearby_enemies.erase(body)
 
 func on_headshot_taken(position: Vector3) -> void:
+	headshot_audio_stream.stream = headshot_sounds[rng.randi_range(0, len(headshot_sounds)-1)]
+	headshot_audio_stream.pitch_scale = rng.randf_range(0.9, 1.1)
+	headshot_audio_stream.play()
 	var headshot = headshot_blood_scene.instance()
 	headshot.transform.origin = head_area.transform.origin
 	headshot.emitting = true

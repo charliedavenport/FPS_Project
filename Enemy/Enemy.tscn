@@ -1,10 +1,11 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Enemy/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/fire_spritesheet_color_enemy.png" type="Texture" id=2]
 [ext_resource path="res://Enemy/zombie_v2_2_spritesheet.png" type="Texture" id=3]
 [ext_resource path="res://Enemy/HeadArea.gd" type="Script" id=4]
 [ext_resource path="res://Enemy/EnemyShader.gdshader" type="Shader" id=5]
+[ext_resource path="res://Assets/Sound/splat/impactsplat01.mp3" type="AudioStream" id=6]
 
 [sub_resource type="SphereShape" id=17]
 radius = 0.422253
@@ -272,3 +273,7 @@ shape = SubResource( 16 )
 
 [node name="DeathTimer" type="Timer" parent="."]
 wait_time = 0.75
+
+[node name="HeadshotAudioStream" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -22.5

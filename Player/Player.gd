@@ -84,8 +84,8 @@ func _physics_process(delta):
 	else:
 		jump_request = false
 		apply_gravity(delta)
-	#vel = move_and_slide(move_input, Vector3.UP, true, 4, 1.22)
-	vel = move_and_slide_with_snap(move_input, snap, Vector3.UP, true, 4, 0.6)
+	vel = move_and_slide(move_input, Vector3.UP, true, 4, 1.22)
+	#vel = move_and_slide_with_snap(move_input, snap, Vector3.UP, true, 4, 0.6)
 
 func reset() -> void:
 	set_process(true)

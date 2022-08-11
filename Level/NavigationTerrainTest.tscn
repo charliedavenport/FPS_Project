@@ -72,7 +72,7 @@ script = ExtResource( 8 )
 transform = Transform( 0.0748221, 0, -0.997197, 0, 1, 0, 0.997197, 0, 0.0748221, 0, 4.83218, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
-transform = Transform( 0.0748221, 0, -0.997197, 0, 1, 0, 0.997197, 0, 0.0748221, 0, 1.30966, 0 )
+transform = Transform( -0.997197, 0, -0.074822, 0, 1, 0, 0.074822, 0, -0.997197, 0, 1.30966, 0 )
 
 [node name="RainSpawner" parent="Player" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22.9731, 0 )

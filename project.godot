@@ -84,6 +84,10 @@ config/name="FPS Project"
 run/main_scene="res://Level/NavigationTerrainTest.tscn"
 config/icon="res://Assets/icon.png"
 
+[debug]
+
+settings/fps/force_fps=60
+
 [display]
 
 window/size/width=1800

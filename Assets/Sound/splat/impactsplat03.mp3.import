@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/impactsplat03.mp3-9e7245055ae2f8f9e2590ed7374c4194.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/splat/impactsplat03.mp3"
+dest_files=[ "res://.import/impactsplat03.mp3-9e7245055ae2f8f9e2590ed7374c4194.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
